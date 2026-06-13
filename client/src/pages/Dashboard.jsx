@@ -136,7 +136,7 @@ function StatsPanel({ url, onClose }) {
           <div style={{ minWidth:0 }}>
             <div style={{ fontFamily:"'Playfair Display',serif", fontSize:'1rem', fontWeight:900, letterSpacing:'-0.02em', color:INK }}>
               <em style={{ fontStyle:'italic', color:V }}>Statistics</em>
-              <span style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'0.8rem', color:'#8d8b94', marginLeft:8 }}>TinyHop.link/{url.shortCode}</span>
+              <span style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'0.8rem', color:'#8d8b94', marginLeft:8 }}>tinyhop-url.onrender.com/{url.shortCode}</span>
             </div>
             <div style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.72rem', color:'#8d8b94', marginTop:2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', maxWidth:320 }}>{url.originalUrl}</div>
           </div>
@@ -430,7 +430,7 @@ function UrlRow({ url, index, onDelete, onCopy, onEdit, onQR, onAnalytics }) {
             <a href={short} target="_blank" rel="noopener noreferrer" id={`url-short-link-${url.id}`}
               style={{ fontFamily: "'Fragment Mono',monospace", fontSize: '0.875rem', fontWeight: 600, color: V, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 3, transition: 'color .15s' }}
               onMouseEnter={e => e.currentTarget.style.color = VD} onMouseLeave={e => e.currentTarget.style.color = V}>
-              TinyHop.link/{url.shortCode}
+              tinyhop-url.onrender.com/{url.shortCode}
               <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
             </a>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, padding: '2px 7px', borderRadius: 99, fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', background: expired ? 'rgba(239,68,68,0.08)' : `${GRN}10`, color: expired ? '#ef4444' : GRN, border: `1px solid ${expired ? 'rgba(239,68,68,0.15)' : GRN + '25'}` }}>
@@ -587,9 +587,9 @@ function CreateModal({ onClose, onCreated }) {
               <div>
                 <label style={{ display: 'block', fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8d8b94', marginBottom: 7 }}>Alias <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#b0adb8' }}>(opt)</span></label>
                 <div style={{ position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', fontFamily: "'Fragment Mono',monospace", fontSize: '0.7rem', color: '#b0adb8', pointerEvents: 'none', zIndex: 1, userSelect: 'none' }}>TinyHop.link/</span>
-                  {!form.customCode && <span style={{ position: 'absolute', left: 85, top: '50%', transform: 'translateY(-50%)', fontFamily: "'Fragment Mono',monospace", fontSize: '0.875rem', color: '#b0adb8', pointerEvents: 'none', fontWeight: 400 }}>my-brand</span>}
-                  <input id="modal-custom-code" type="text" style={{ ...IS, paddingLeft: 85 }} placeholder="" value={form.customCode} onChange={e => setForm({ ...form, customCode: e.target.value })} onFocus={e => e.target.style.borderBottomColor = V} onBlur={e => e.target.style.borderBottomColor = INK} autoComplete="off" />
+                  <span style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', fontFamily: "'Fragment Mono',monospace", fontSize: '0.7rem', color: '#b0adb8', pointerEvents: 'none', zIndex: 1, userSelect: 'none' }}>tinyhop-url.onrender.com/</span>
+                  {!form.customCode && <span style={{ position: 'absolute', left: 155, top: '50%', transform: 'translateY(-50%)', fontFamily: "'Fragment Mono',monospace", fontSize: '0.875rem', color: '#b0adb8', pointerEvents: 'none', fontWeight: 400 }}>my-brand</span>}
+                  <input id="modal-custom-code" type="text" style={{ ...IS, paddingLeft: 155 }} placeholder="" value={form.customCode} onChange={e => setForm({ ...form, customCode: e.target.value })} onFocus={e => e.target.style.borderBottomColor = V} onBlur={e => e.target.style.borderBottomColor = INK} autoComplete="off" />
                 </div>
               </div>
               <div>
@@ -1029,7 +1029,7 @@ export default function Dashboard() {
                     <div style={{ width: 18, height: 18, borderRadius: 4, overflow: 'hidden', background: P3, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <img src={`https://www.google.com/s2/favicons?domain=${domain(u.originalUrl)}&sz=32`} alt="" width={11} height={11} onError={e => { e.target.style.display = 'none' }} />
                     </div>
-                    <a href={`${base()}/${u.shortCode}`} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Fragment Mono',monospace", fontSize: '0.8rem', fontWeight: 600, color: V, textDecoration: 'none', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>TinyHop.link/{u.shortCode}</a>
+                    <a href={`${base()}/${u.shortCode}`} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Fragment Mono',monospace", fontSize: '0.8rem', fontWeight: 600, color: V, textDecoration: 'none', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>tinyhop-url.onrender.com/{u.shortCode}</a>
                     <span style={{ fontFamily: "'Playfair Display',serif", fontSize: '0.9rem', fontWeight: 900, color: V, flexShrink: 0 }}>{u.clickCount || 0}</span>
                     <CopyBtn text={`${base()}/${u.shortCode}`} sm />
                   </div>

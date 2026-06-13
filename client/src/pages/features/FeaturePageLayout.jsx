@@ -80,7 +80,7 @@ const STORIES = {
   'Link Shortening': [
     { type: 'statement', text: 'Long URLs break layouts, kill vibes, and leak UTM data to anyone who sees them.' },
     { type: 'solution', heading: 'One paste. One click.', body: 'Drop any URL — no matter how deeply nested — into TinyHop. A clean short link appears instantly, ready to share, track, and manage.' },
-    { type: 'demo', label: 'BEFORE', value: 'yoursite.com/blog/2024/how-to-grow-your-startup-with-content-marketing', outcome: 'TinyHop.link/grow24', outLabel: 'AFTER' },
+    { type: 'demo', label: 'BEFORE', value: 'yoursite.com/blog/2024/how-to-grow-your-startup-with-content-marketing', outcome: 'tinyhop-url.onrender.com/grow24', outLabel: 'AFTER' },
     { type: 'trio', items: ['Smart deduplication', 'Custom slugs', 'Instant generation'] },
   ],
   'Real-Time Analytics': [
@@ -90,9 +90,9 @@ const STORIES = {
     { type: 'trio', items: ['Country & city data', 'Desktop / mobile / tablet', 'Time-series charts'] },
   ],
   'Custom Aliases': [
-    { type: 'statement', text: '"TinyHop.link/xK9pQ" works. "TinyHop.link/launch24" converts. Brand is worth 3× the click-through rate.' },
+    { type: 'statement', text: '"tinyhop-url.onrender.com/xK9pQ" works. "tinyhop-url.onrender.com/launch24" converts. Brand is worth 3× the click-through rate.' },
     { type: 'solution', heading: 'Your name in every link.', body: 'Replace auto-generated codes with slugs that carry context, reinforce your brand, and earn more clicks — on every channel.' },
-    { type: 'demo', label: 'GENERIC', value: 'TinyHop.link/xK9pQ', outcome: 'TinyHop.link/launch24', outLabel: 'BRANDED' },
+    { type: 'demo', label: 'GENERIC', value: 'tinyhop-url.onrender.com/xK9pQ', outcome: 'tinyhop-url.onrender.com/launch24', outLabel: 'BRANDED' },
     { type: 'trio', items: ['Campaign clarity', 'Instant validation', 'Print-ready links'] },
   ],
   'QR Code Generator': [
@@ -104,7 +104,7 @@ const STORIES = {
   'Link Expiry': [
     { type: 'statement', text: 'Flash sales end at midnight. Event registrations close on Thursday. Your links should know that.' },
     { type: 'solution', heading: 'Links that live on a schedule.', body: 'Set an exact expiry date and time. After that moment, the short URL shows a clean expired page — no dead clicks, no stale content.' },
-    { type: 'demo', label: 'WHEN ACTIVE', value: 'TinyHop.link/summer-sale → yoursite.com/sale', outcome: '⏰ Link expired gracefully', outLabel: 'AFTER DEADLINE' },
+    { type: 'demo', label: 'WHEN ACTIVE', value: 'tinyhop-url.onrender.com/summer-sale → yoursite.com/sale', outcome: '⏰ Link expired gracefully', outLabel: 'AFTER DEADLINE' },
     { type: 'trio', items: ['Precise to the minute', 'Custom expiry message', 'Easy extension'] },
   ],
   'Smart Routing': [
@@ -256,7 +256,7 @@ export default function FeaturePageLayout({ tag, title, subtitle, heroStat, acce
                     <div style={{ color: 'var(--inkd)', paddingLeft: 16 }}>.<span style={{ color: '#16a34a' }}>shorten</span>(<span style={{ color: '#d97706' }}>yourLongUrl</span>)</div>
                     <div style={{ color: 'var(--inkd)', paddingLeft: 16 }}>.<span style={{ color: '#16a34a' }}>track</span>()</div>
                     <div style={{ color: 'var(--inkd)', paddingLeft: 16 }}>.<span style={{ color: '#16a34a' }}>analyze</span>()</div>
-                    <div style={{ color: 'var(--inkfaint)', marginTop: 10 }}>// → TinyHop.link/your-link</div>
+                    <div style={{ color: 'var(--inkfaint)', marginTop: 10 }}>// → tinyhop-url.onrender.com/your-link</div>
                   </div>
                 </div>
               </SlideIn>

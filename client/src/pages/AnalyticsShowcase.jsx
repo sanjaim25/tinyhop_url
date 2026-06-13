@@ -123,10 +123,10 @@ function ChapterLabel({ n, text }) {
 
 /* ── Interactive: Link Comparison ── */
 const LINKS_DATA = [
-  { name: 'TinyHop.link/launch24', color: '#7c3aed', data: [120,340,580,820,1100,980,1240,1060,1380,1580,1420,1680] },
-  { name: 'TinyHop.link/product',  color: '#16a34a', data: [80,160,280,320,400,380,440,520,480,560,600,640] },
-  { name: 'TinyHop.link/sale',     color: '#d97706', data: [40,80,200,460,880,1020,760,480,300,200,140,100] },
-  { name: 'TinyHop.link/grow',     color: '#2563eb', data: [20,40,60,80,120,160,200,240,300,360,420,500] },
+  { name: 'tinyhop-url.onrender.com/launch24', color: '#7c3aed', data: [120,340,580,820,1100,980,1240,1060,1380,1580,1420,1680] },
+  { name: 'tinyhop-url.onrender.com/product',  color: '#16a34a', data: [80,160,280,320,400,380,440,520,480,560,600,640] },
+  { name: 'tinyhop-url.onrender.com/sale',     color: '#d97706', data: [40,80,200,460,880,1020,760,480,300,200,140,100] },
+  { name: 'tinyhop-url.onrender.com/grow',     color: '#2563eb', data: [20,40,60,80,120,160,200,240,300,360,420,500] },
 ]
 const WEEKS = ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11','W12']
 
@@ -725,11 +725,11 @@ export default function AnalyticsShowcase() {
               <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.75rem', fontWeight: 700, color: 'var(--inkd)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Live click stream</span>
             </div>
             {[
-              { flag: '🇺🇸', country: 'San Francisco, US', device: 'iPhone 15',  browser: 'Safari',  time: 'just now', link: 'TinyHop.link/launch24' },
-              { flag: '🇬🇧', country: 'London, UK',        device: 'MacBook Pro', browser: 'Chrome',  time: '2s ago',   link: 'TinyHop.link/product' },
-              { flag: '🇩🇪', country: 'Berlin, DE',        device: 'Android',    browser: 'Firefox', time: '5s ago',   link: 'TinyHop.link/sale' },
-              { flag: '🇮🇳', country: 'Mumbai, IN',        device: 'iPad',        browser: 'Safari',  time: '8s ago',   link: 'TinyHop.link/launch24' },
-              { flag: '🇨🇦', country: 'Toronto, CA',       device: 'Windows PC', browser: 'Edge',    time: '11s ago',  link: 'TinyHop.link/grow' },
+              { flag: '🇺🇸', country: 'San Francisco, US', device: 'iPhone 15',  browser: 'Safari',  time: 'just now', link: 'tinyhop-url.onrender.com/launch24' },
+              { flag: '🇬🇧', country: 'London, UK',        device: 'MacBook Pro', browser: 'Chrome',  time: '2s ago',   link: 'tinyhop-url.onrender.com/product' },
+              { flag: '🇩🇪', country: 'Berlin, DE',        device: 'Android',    browser: 'Firefox', time: '5s ago',   link: 'tinyhop-url.onrender.com/sale' },
+              { flag: '🇮🇳', country: 'Mumbai, IN',        device: 'iPad',        browser: 'Safari',  time: '8s ago',   link: 'tinyhop-url.onrender.com/launch24' },
+              { flag: '🇨🇦', country: 'Toronto, CA',       device: 'Windows PC', browser: 'Edge',    time: '11s ago',  link: 'tinyhop-url.onrender.com/grow' },
             ].map((row, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 20px', borderBottom: i < 4 ? '1px solid rgba(20,20,28,0.05)' : 'none', transition: 'background .15s' }}
                 onMouseEnter={e => e.currentTarget.style.background='var(--paper-2)'}

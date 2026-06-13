@@ -90,21 +90,21 @@ export default function Contact() {
               icon: '💬',
               title: 'General Support',
               desc: 'Questions about your account or features',
-              contact: 'support@TinyHop.link',
+              contact: 'support@tinyhop-url.onrender.com',
               action: 'Email Support'
             },
             {
               icon: '🚀',
               title: 'Sales & Enterprise',
               desc: 'Discuss custom plans and solutions',
-              contact: 'sales@TinyHop.link',
+              contact: 'sales@tinyhop-url.onrender.com',
               action: 'Contact Sales'
             },
             {
               icon: '🐛',
               title: 'Report an Issue',
               desc: 'Found a bug or technical problem?',
-              contact: 'bugs@TinyHop.link',
+              contact: 'bugs@tinyhop-url.onrender.com',
               action: 'Report Bug'
             },
           ].map((card, idx) => (

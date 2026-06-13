@@ -326,7 +326,7 @@ export default function Analytics() {
                               onMouseEnter={e => e.currentTarget.style.background = P2}
                               onMouseLeave={e => e.currentTarget.style.background = ''}>
                               <td style={{ padding: '10px 13px', whiteSpace: 'nowrap' }}>
-                                <span style={{ fontFamily: "'Fragment Mono',monospace", fontSize: '0.8rem', fontWeight: 600, color: V }}>TinyHop.link/{u.shortCode}</span>
+                                <span style={{ fontFamily: "'Fragment Mono',monospace", fontSize: '0.8rem', fontWeight: 600, color: V }}>tinyhop-url.onrender.com/{u.shortCode}</span>
                               </td>
                               <td style={{ padding: '10px 13px', maxWidth: 200 }}>
                                 <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', color: '#8d8b94', fontSize: '0.775rem' }} title={u.originalUrl}>{u.originalUrl}</span>

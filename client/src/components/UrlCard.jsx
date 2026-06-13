@@ -34,7 +34,7 @@ export default function UrlCard({ url, index, onDelete, onCopy, onEdit, onQR, on
               <img src={`https://www.google.com/s2/favicons?domain=${domain(url.originalUrl)}&sz=32`} alt="" width={14} height={14} onError={e => { e.target.style.display = 'none' }} />
             </div>
             <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="url-short" id={`url-short-link-${url.id}`}>
-              TinyHop.link/{url.shortCode}
+              tinyhop-url.onrender.com/{url.shortCode}
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
             <span className={`badge ${expired ? 'badge-err' : 'badge-g'}`}>{expired ? 'Expired' : 'Active'}</span>

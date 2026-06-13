@@ -40,7 +40,7 @@ export default function QRModal({ url, onClose }) {
           <div>
             <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: '1.5rem', fontWeight: 900, letterSpacing: '-0.025em', color: 'var(--inkd)' }}>QR <em style={{ fontStyle: 'italic', color: '#7c3aed' }}>Code</em></h2>
             <p style={{ fontFamily: "'Fragment Mono',monospace", fontSize: '0.8125rem', color: 'var(--inkfaint)', marginTop: 4 }}>
-              TinyHop.link/{url.shortCode}
+              tinyhop-url.onrender.com/{url.shortCode}
             </p>
           </div>
           <button onClick={onClose} id="qr-modal-close"
