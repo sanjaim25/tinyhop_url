@@ -47,7 +47,7 @@ export default function FloatingDemo() {
               fontSize: 13
             }}
           >
-            <Link size={18}/>
+            <Link size={18} color="#15141c" strokeWidth={2.5} />
           </motion.div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-brand)', fontFamily: 'var(--font-mono)' }}>

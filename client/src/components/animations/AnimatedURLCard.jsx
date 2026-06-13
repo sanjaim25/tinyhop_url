@@ -78,11 +78,11 @@ export default function AnimatedURLCard({ url, index, onDelete, onCopy, onEdit, 
           {' '}clicks
         </div>
         <div className="url-meta-item">
-          <Calendar size={14}/> {new Date(url.createdAt).toLocaleDateString()}
+          <Calendar size={14} color="#15141c" strokeWidth={2.5} /> {new Date(url.createdAt).toLocaleDateString()}
         </div>
         {url.expiresAt && (
           <div className="url-meta-item">
-            <Clock size={14}/> Expires {new Date(url.expiresAt).toLocaleDateString()}
+            <Clock size={14} color="#15141c" strokeWidth={2.5} /> Expires {new Date(url.expiresAt).toLocaleDateString()}
           </div>
         )}
       </div>

@@ -160,12 +160,12 @@ export default function About() {
             marginTop: 24,
           }}>
             {[
-              { icon: <Zap size={24}/>, title: 'Lightning Fast', desc: 'Links shortened in milliseconds with 99.9% uptime' },
-              { icon: <Lock size={24}/>, title: 'Enterprise Security', desc: 'Bank-grade encryption and password protection' },
-              { icon: <BarChart2 size={24}/>, title: 'Detailed Insights', desc: 'Comprehensive analytics and reporting tools' },
-              { icon: <Palette size={24}/>, title: 'Full Customization', desc: 'Custom aliases, domains, and branding options' },
-              { icon: <Globe size={24}/>, title: 'Global Scale', desc: 'CDN-powered infrastructure for worldwide reach' },
-              { icon: <Lightbulb size={24}/>, title: 'Intuitive Design', desc: 'Clean interface that anyone can master' },
+              { icon: <Zap size={24} color="#15141c" strokeWidth={2.5} />, title: 'Lightning Fast', desc: 'Links shortened in milliseconds with 99.9% uptime' },
+              { icon: <Lock size={24} color="#15141c" strokeWidth={2.5} />, title: 'Enterprise Security', desc: 'Bank-grade encryption and password protection' },
+              { icon: <BarChart2 size={24} color="#15141c" strokeWidth={2.5} />, title: 'Detailed Insights', desc: 'Comprehensive analytics and reporting tools' },
+              { icon: <Palette size={24} color="#15141c" strokeWidth={2.5} />, title: 'Full Customization', desc: 'Custom aliases, domains, and branding options' },
+              { icon: <Globe size={24} color="#15141c" strokeWidth={2.5} />, title: 'Global Scale', desc: 'CDN-powered infrastructure for worldwide reach' },
+              { icon: <Lightbulb size={24} color="#15141c" strokeWidth={2.5} />, title: 'Intuitive Design', desc: 'Clean interface that anyone can master' },
             ].map((item, idx) => (
               <div key={idx} style={{
                 padding: 20,

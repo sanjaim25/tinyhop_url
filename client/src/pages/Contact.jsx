@@ -88,21 +88,21 @@ export default function Contact() {
         }}>
           {[
             {
-              icon: <MessageCircle size={24}/>,
+              icon: <MessageCircle size={24} color="#15141c" strokeWidth={2.5} />,
               title: 'General Support',
               desc: 'Questions about your account or features',
               contact: 'support@tinyhop-url.onrender.com',
               action: 'Email Support'
             },
             {
-              icon: <Rocket size={24}/>,
+              icon: <Rocket size={24} color="#15141c" strokeWidth={2.5} />,
               title: 'Sales & Enterprise',
               desc: 'Discuss custom plans and solutions',
               contact: 'sales@tinyhop-url.onrender.com',
               action: 'Contact Sales'
             },
             {
-              icon: <Bug size={24}/>,
+              icon: <Bug size={24} color="#15141c" strokeWidth={2.5} />,
               title: 'Report an Issue',
               desc: 'Found a bug or technical problem?',
               contact: 'bugs@tinyhop-url.onrender.com',

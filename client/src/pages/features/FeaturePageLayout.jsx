@@ -105,7 +105,7 @@ const STORIES = {
   'Link Expiry': [
     { type: 'statement', text: 'Flash sales end at midnight. Event registrations close on Thursday. Your links should know that.' },
     { type: 'solution', heading: 'Links that live on a schedule.', body: 'Set an exact expiry date and time. After that moment, the short URL shows a clean expired page — no dead clicks, no stale content.' },
-    { type: 'demo', label: 'WHEN ACTIVE', value: 'tinyhop-url.onrender.com/summer-sale → yoursite.com/sale', outcome: '<span style={{display:"flex", alignItems:"center", gap:4}}><Clock size={16}/> Link expired gracefully</span>', outLabel: 'AFTER DEADLINE' },
+    { type: 'demo', label: 'WHEN ACTIVE', value: 'tinyhop-url.onrender.com/summer-sale → yoursite.com/sale', outcome: '<span style={{display:"flex", alignItems:"center", gap:4}}><Clock size={16} color="#15141c" strokeWidth={2.5} /> Link expired gracefully</span>', outLabel: 'AFTER DEADLINE' },
     { type: 'trio', items: ['Precise to the minute', 'Custom expiry message', 'Easy extension'] },
   ],
   'Smart Routing': [

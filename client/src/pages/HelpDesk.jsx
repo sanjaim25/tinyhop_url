@@ -194,7 +194,7 @@ export default function HelpDesk() {
 
         {/* Still Need Help */}
         <div style={{ background: '#fff', border: `1px solid ${LINE}`, borderRadius: 22, padding: '40px', marginTop: 48, textAlign: 'center', animation: 'fadeUp .6s cubic-bezier(0.16,1,0.3,1) .3s both' }}>
-          <div style={{display:"flex", justifyContent:"center", marginBottom:16}}><MessageCircle size={48}/></div>
+          <div style={{display:"flex", justifyContent:"center", marginBottom:16}}><MessageCircle size={48} color="#15141c" strokeWidth={2.5} /></div>
           <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: '1.75rem', fontWeight: 900, color: INK, marginBottom: 12 }}>
             Still need help?
           </h3>

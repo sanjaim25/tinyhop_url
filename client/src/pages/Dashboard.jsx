@@ -118,10 +118,10 @@ function StatsPanel({ url, onClose }) {
   )
 
   const TABS = [
-    { key:'overview', label:'Overview',  icon:<BarChart2 size={16}/> },
-    { key:'visits',   label:'Visits',    icon:<Clock size={16}/> },
-    { key:'geo',      label:'Geography', icon:<Globe size={16}/> },
-    { key:'devices',  label:'Devices',   icon:<Smartphone size={16}/> },
+    { key:'overview', label:'Overview',  icon:<BarChart2 size={16} color="#15141c" strokeWidth={2.5} /> },
+    { key:'visits',   label:'Visits',    icon:<Clock size={16} color="#15141c" strokeWidth={2.5} /> },
+    { key:'geo',      label:'Geography', icon:<Globe size={16} color="#15141c" strokeWidth={2.5} /> },
+    { key:'devices',  label:'Devices',   icon:<Smartphone size={16} color="#15141c" strokeWidth={2.5} /> },
   ]
 
   return (
@@ -180,7 +180,7 @@ function StatsPanel({ url, onClose }) {
                 {/* Meta row */}
                 <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(140px,1fr))', gap:10 }}>
                   {[
-                    { label:'Status',      value: expired? <span style={{display:"flex", alignItems:"center", gap:4}}><Clock size={14}/> Expired</span> : <span style={{display:"flex", alignItems:"center", gap:4}}><CheckCircle size={14}/> Active</span>, color: expired?'#ef4444':GRN },
+                    { label:'Status',      value: expired? <span style={{display:"flex", alignItems:"center", gap:4}}><Clock size={14} color="#15141c" strokeWidth={2.5} /> Expired</span> : <span style={{display:"flex", alignItems:"center", gap:4}}><CheckCircle size={14} color="#15141c" strokeWidth={2.5} /> Active</span>, color: expired?'#ef4444':GRN },
                     { label:'Total Clicks',value: total.toLocaleString(),           color: V },
                     { label:'Last 7 Days', value: last7.toLocaleString(),           color: GRN },
                     { label:'Peak Day',    value: peak.toLocaleString(),            color: '#9f67f5' },
@@ -260,12 +260,12 @@ function StatsPanel({ url, onClose }) {
                       <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
                         {data.byDevice.map(({device,count},i) => {
                           const pct = total ? Math.round((count/total)*100) : 0
-                          const icons = {desktop:<Monitor size={16}/>,mobile:<Smartphone size={16}/>,tablet:<Tablet size={16}/>}
+                          const icons = {desktop:<Monitor size={16} color="#15141c" strokeWidth={2.5} />,mobile:<Smartphone size={16} color="#15141c" strokeWidth={2.5} />,tablet:<Tablet size={16} color="#15141c" strokeWidth={2.5} />}
                           return (
                             <div key={device||i}>
                               <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:4 }}>
                                 <span style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.8125rem', fontWeight:600, color:INK, display:'flex', alignItems:'center', gap:5 }}>
-                                  {icons[device?.toLowerCase()]||<Monitor size={16}/>} {device?device[0].toUpperCase()+device.slice(1):'Unknown'}
+                                  {icons[device?.toLowerCase()]||<Monitor size={16} color="#15141c" strokeWidth={2.5} />} {device?device[0].toUpperCase()+device.slice(1):'Unknown'}
                                 </span>
                                 <span style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'0.7rem', color:'#8d8b94', fontWeight:600 }}>{count} · {pct}%</span>
                               </div>
@@ -302,7 +302,7 @@ function StatsPanel({ url, onClose }) {
                           </td>
                           <td style={{ padding:'9px 13px', color:INK, fontWeight:500 }}>
                             <span style={{ display:'flex', alignItems:'center', gap:4 }}>
-                              {v.device==="mobile"?<Smartphone size={14}/>:v.device==="tablet"?<Tablet size={14}/>:<Monitor size={14}/>}
+                              {v.device==="mobile"?<Smartphone size={14} color="#15141c" strokeWidth={2.5} />:v.device==="tablet"?<Tablet size={14} color="#15141c" strokeWidth={2.5} />:<Monitor size={14} color="#15141c" strokeWidth={2.5} />}
                               {v.device?v.device[0].toUpperCase()+v.device.slice(1):'Unknown'}
                             </span>
                           </td>
@@ -316,7 +316,7 @@ function StatsPanel({ url, onClose }) {
                   </table>
                 ) : (
                   <div style={{ textAlign:'center', padding:'32px', color:'#8d8b94', fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.9rem' }}>
-                    <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:10}}><Inbox size={24}/>No visits recorded yet</div>
+                    <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:10}}><Inbox size={24} color="#15141c" strokeWidth={2.5} />No visits recorded yet</div>
                   </div>
                 )}
               </div>
@@ -348,7 +348,7 @@ function StatsPanel({ url, onClose }) {
                     )
                   })}
                 </div>
-              ) : <div style={{ textAlign:'center', padding:'32px', color:'#8d8b94', fontFamily:"'Space Grotesk',sans-serif" }}><div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:10}}><Globe size={24}/>No location data yet</div></div>
+              ) : <div style={{ textAlign:'center', padding:'32px', color:'#8d8b94', fontFamily:"'Space Grotesk',sans-serif" }}><div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:10}}><Globe size={24} color="#15141c" strokeWidth={2.5} />No location data yet</div></div>
             )}
 
             {/* ── DEVICES ── */}
@@ -366,13 +366,13 @@ function StatsPanel({ url, onClose }) {
                   <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
                     {data.byDevice.map(({device,count},i) => {
                       const pct = total ? Math.round((count/total)*100) : 0
-                      const icons = {desktop:<Monitor size={16}/>,mobile:<Smartphone size={16}/>,tablet:<Tablet size={16}/>}
+                      const icons = {desktop:<Monitor size={16} color="#15141c" strokeWidth={2.5} />,mobile:<Smartphone size={16} color="#15141c" strokeWidth={2.5} />,tablet:<Tablet size={16} color="#15141c" strokeWidth={2.5} />}
                       return (
                         <div key={device||i} style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
                           <div style={{ display:'flex', alignItems:'center', gap:8 }}>
                             <div style={{ width:10, height:10, borderRadius:'50%', background:COLS[(i+3)%COLS.length] }}/>
                             <span style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.875rem', fontWeight:500, color:INK }}>
-                              {icons[device?.toLowerCase()]||<Monitor size={16}/>} {device?device[0].toUpperCase()+device.slice(1):'Unknown'}
+                              {icons[device?.toLowerCase()]||<Monitor size={16} color="#15141c" strokeWidth={2.5} />} {device?device[0].toUpperCase()+device.slice(1):'Unknown'}
                             </span>
                           </div>
                           <span style={{ fontFamily:"'Playfair Display',serif", fontSize:'1rem', fontWeight:900, color:COLS[(i+3)%COLS.length] }}>{pct}%</span>
@@ -381,13 +381,13 @@ function StatsPanel({ url, onClose }) {
                     })}
                   </div>
                 </div>
-              ) : <div style={{ textAlign:'center', padding:'32px', color:'#8d8b94', fontFamily:"'Space Grotesk',sans-serif" }}><div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:10}}><Smartphone size={24}/>No device data yet</div></div>
+              ) : <div style={{ textAlign:'center', padding:'32px', color:'#8d8b94', fontFamily:"'Space Grotesk',sans-serif" }}><div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:10}}><Smartphone size={24} color="#15141c" strokeWidth={2.5} />No device data yet</div></div>
             )}
 
             {/* zero state */}
             {data.totalClicks === 0 && tab==='overview' && (
               <div style={{ textAlign:'center', padding:'32px', fontFamily:"'Space Grotesk',sans-serif" }}>
-                <div style={{display:"flex", justifyContent:"center", marginBottom:10}}><Inbox size={32}/></div>
+                <div style={{display:"flex", justifyContent:"center", marginBottom:10}}><Inbox size={32} color="#15141c" strokeWidth={2.5} /></div>
                 <div style={{ fontFamily:"'Playfair Display',serif", fontSize:'1.25rem', fontWeight:700, color:INK, marginBottom:6 }}>No clicks yet</div>
                 <div style={{ fontSize:'0.875rem', color:'#8d8b94' }}>Share your link to start collecting data.</div>
               </div>
@@ -776,7 +776,7 @@ export default function Dashboard() {
                   transition: 'all 0.2s',
                 }}
               >
-                <span style={{display:"flex",alignItems:"center",gap:8}}><Paperclip size={18}/> Links</span>
+                <span style={{display:"flex",alignItems:"center",gap:8}}><Paperclip size={18} color="#15141c" strokeWidth={2.5} /> Links</span>
               </button>
               <button
                 onClick={() => { setViewMode('batches'); setPage(1); setSelectedBatch(null) }}
@@ -793,7 +793,7 @@ export default function Dashboard() {
                   transition: 'all 0.2s',
                 }}
               >
-                <span style={{display:"flex",alignItems:"center",gap:8}}><Package size={18}/> Batches (</span>{batches.length})
+                <span style={{display:"flex",alignItems:"center",gap:8}}><Package size={18} color="#15141c" strokeWidth={2.5} /> Batches (</span>{batches.length})
               </button>
             </div>
             <div style={{ position: 'relative' }}>
@@ -817,10 +817,10 @@ export default function Dashboard() {
           <div>
             {/* Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 14, marginBottom: 22 }}>
-              <StatCard label="Links"  value={loading ? '—' : urls.length}                                                  icon={<LinkIcon size={20}/>} color={V}   spark={spark(urls.length / 7)}                        delay={0}   sub="total" />
-              <StatCard label="Clicks" value={loading ? '—' : totalClicks.toLocaleString()}                                 icon={<TrendingUp size={20}/>} color={GRN} spark={spark(totalClicks / 7)}                        delay={60}  sub="all time" />
-              <StatCard label="Avg"    value={loading ? '—' : urls.length ? ((totalClicks / urls.length) || 0).toFixed(1) : '—'} icon={<TrendingUp size={20}/>} color={AMB} spark={spark((totalClicks / Math.max(urls.length, 1)) / 7)} delay={120} sub="per link" />
-              <StatCard label="Active" value={loading ? '—' : activeLinks}                                                  icon={<Zap size={20}/>} color={BLU} spark={spark(activeLinks / 7)}                        delay={180} sub={`of ${urls.length}`} />
+              <StatCard label="Links"  value={loading ? '—' : urls.length}                                                  icon={<LinkIcon size={20} color="#15141c" strokeWidth={2.5} />} color={V}   spark={spark(urls.length / 7)}                        delay={0}   sub="total" />
+              <StatCard label="Clicks" value={loading ? '—' : totalClicks.toLocaleString()}                                 icon={<TrendingUp size={20} color="#15141c" strokeWidth={2.5} />} color={GRN} spark={spark(totalClicks / 7)}                        delay={60}  sub="all time" />
+              <StatCard label="Avg"    value={loading ? '—' : urls.length ? ((totalClicks / urls.length) || 0).toFixed(1) : '—'} icon={<TrendingUp size={20} color="#15141c" strokeWidth={2.5} />} color={AMB} spark={spark((totalClicks / Math.max(urls.length, 1)) / 7)} delay={120} sub="per link" />
+              <StatCard label="Active" value={loading ? '—' : activeLinks}                                                  icon={<Zap size={20} color="#15141c" strokeWidth={2.5} />} color={BLU} spark={spark(activeLinks / 7)}                        delay={180} sub={`of ${urls.length}`} />
             </div>
 
             {/* URL list */}
@@ -839,7 +839,7 @@ export default function Dashboard() {
               </div>
             ) : filtered.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '64px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-                <div style={{ width: 64, height: 64, borderRadius: 16, background: P2, border: `1px solid ${LINE}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem' }}>{search ? <Search size={28}/> : <LinkIcon size={28}/>}</div>
+                <div style={{ width: 64, height: 64, borderRadius: 16, background: P2, border: `1px solid ${LINE}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem' }}>{search ? <Search size={28} color="#15141c" strokeWidth={2.5} /> : <LinkIcon size={28} color="#15141c" strokeWidth={2.5} />}</div>
                 <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: '1.5rem', fontWeight: 700, color: INK, letterSpacing: '-0.02em' }}>{search ? 'No links found' : 'No links yet'}</h2>
                 <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.9rem', color: '#8d8b94', maxWidth: 320 }}>{search ? `Nothing matches "${search}"` : 'Create your first short link and start tracking.'}</p>
                 {!search && (
@@ -949,16 +949,16 @@ export default function Dashboard() {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                           <div style={{ flex: 1 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                              <Package size={24}/>
+                              <Package size={24} color="#15141c" strokeWidth={2.5} />
                               <h3 style={{ fontSize: '1rem', fontWeight: 700, color: INK, fontFamily: "'Playfair Display',serif", margin: 0 }}>
                                 {batch.name}
                               </h3>
                             </div>
                             <div style={{ display: 'flex', gap: 16, fontSize: '0.8125rem', color: '#8d8b94', fontFamily: "'Space Grotesk',sans-serif" }}>
-                              <span style={{display:"flex", alignItems:"center", gap:4}}><BarChart2 size={14}/> {batch.totalUrls} URLs</span>
+                              <span style={{display:"flex", alignItems:"center", gap:4}}><BarChart2 size={14} color="#15141c" strokeWidth={2.5} /> {batch.totalUrls} URLs</span>
                               <span style={{ color: GRN }}>✓ {batch.successful} success</span>
                               {batch.failed > 0 && <span style={{ color: '#ef4444' }}>✗ {batch.failed} failed</span>}
-                              <span style={{display:"flex", alignItems:"center", gap:4}}><Calendar size={14}/> {fmtD(batch.createdAt)}</span>
+                              <span style={{display:"flex", alignItems:"center", gap:4}}><Calendar size={14} color="#15141c" strokeWidth={2.5} /> {fmtD(batch.createdAt)}</span>
                             </div>
                           </div>
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={V} strokeWidth="2.5">

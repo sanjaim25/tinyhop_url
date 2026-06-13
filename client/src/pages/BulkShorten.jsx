@@ -410,7 +410,7 @@ export default function BulkShorten() {
                   style={{ display: 'none' }}
                 />
                 
-                <div style={{display:"flex", justifyContent:"center", marginBottom:16}}><FileText size={48}/></div>
+                <div style={{display:"flex", justifyContent:"center", marginBottom:16}}><FileText size={48} color="#15141c" strokeWidth={2.5} /></div>
                 
                 {file ? (
                   <div>
@@ -496,7 +496,7 @@ export default function BulkShorten() {
               >
                 {processing ? (
                   <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-                    <span style={{ animation: "pulse 1.5s ease-in-out infinite", display:"flex" }}><Settings size={18}/></span>
+                    <span style={{ animation: "pulse 1.5s ease-in-out infinite", display:"flex" }}><Settings size={18} color="#15141c" strokeWidth={2.5} /></span>
                     Processing URLs...
                   </span>
                 ) : (

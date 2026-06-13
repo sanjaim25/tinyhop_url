@@ -451,10 +451,10 @@ export default function Dashboard() {
       <div className="dashboard-content">
         {/* Stats */}
         <div className="grid-4" style={{ marginBottom: 32 }}>
-          <AnimatedStats icon={<LinkIcon size={20}/>} label="Total Links" value={urls.length} change={12} color="#0052ff" delay={0} />
-          <AnimatedStats icon={<Pointer size={20}/>} label="Total Clicks" value={totalClicks} change={8} color="#10d878" delay={0.1} />
-          <AnimatedStats icon={<TrendingUp size={20}/>} label="Avg. CTR" value={urls.length ? ((totalClicks / urls.length) || 0).toFixed(1) : 0} color="#f5a623" delay={0.2} />
-          <AnimatedStats icon={<Zap size={20}/>} label="Active Links" value={urls.filter(u => !u.expiresAt || new Date(u.expiresAt) > new Date()).length} color="#a78bfa" delay={0.3} />
+          <AnimatedStats icon={<LinkIcon size={20} color="#15141c" strokeWidth={2.5} />} label="Total Links" value={urls.length} change={12} color="#0052ff" delay={0} />
+          <AnimatedStats icon={<Pointer size={20} color="#15141c" strokeWidth={2.5} />} label="Total Clicks" value={totalClicks} change={8} color="#10d878" delay={0.1} />
+          <AnimatedStats icon={<TrendingUp size={20} color="#15141c" strokeWidth={2.5} />} label="Avg. CTR" value={urls.length ? ((totalClicks / urls.length) || 0).toFixed(1) : 0} color="#f5a623" delay={0.2} />
+          <AnimatedStats icon={<Zap size={20} color="#15141c" strokeWidth={2.5} />} label="Active Links" value={urls.filter(u => !u.expiresAt || new Date(u.expiresAt) > new Date()).length} color="#a78bfa" delay={0.3} />
         </div>
 
         {/* Analytics Banner */}
@@ -508,7 +508,7 @@ export default function Dashboard() {
             className="empty-state"
           >
             <div className="empty-state-icon">
-              {search ? <Search size={28}/> : <LinkIcon size={28}/>}
+              {search ? <Search size={28} color="#15141c" strokeWidth={2.5} /> : <LinkIcon size={28} color="#15141c" strokeWidth={2.5} />}
             </div>
             <div className="empty-state-title">
               {search ? 'No links found' : 'No links yet'}

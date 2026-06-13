@@ -583,10 +583,10 @@ export default function AnalyticsShowcase() {
           <R delay={100} from="right">
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {[
-                { icon: <Smartphone size={18}/>, label: 'Mobile',    value: '54%', bg: `${ACCENT}12`, border: `${ACCENT}25` },
-                { icon: <Monitor size={18}/>, label: 'Desktop',   value: '38%', bg: 'rgba(20,20,28,0.04)', border: 'rgba(20,20,28,0.1)' },
-                { icon: <Globe size={18}/>, label: 'Countries', value: '23',  bg: 'rgba(22,163,74,0.08)', border: 'rgba(22,163,74,0.2)' },
-                { icon: <LinkIcon size={18}/>, label: 'Links',     value: '47',  bg: 'rgba(217,119,6,0.08)', border: 'rgba(217,119,6,0.2)' },
+                { icon: <Smartphone size={18} color="#15141c" strokeWidth={2.5} />, label: 'Mobile',    value: '54%', bg: `${ACCENT}12`, border: `${ACCENT}25` },
+                { icon: <Monitor size={18} color="#15141c" strokeWidth={2.5} />, label: 'Desktop',   value: '38%', bg: 'rgba(20,20,28,0.04)', border: 'rgba(20,20,28,0.1)' },
+                { icon: <Globe size={18} color="#15141c" strokeWidth={2.5} />, label: 'Countries', value: '23',  bg: 'rgba(22,163,74,0.08)', border: 'rgba(22,163,74,0.2)' },
+                { icon: <LinkIcon size={18} color="#15141c" strokeWidth={2.5} />, label: 'Links',     value: '47',  bg: 'rgba(217,119,6,0.08)', border: 'rgba(217,119,6,0.2)' },
               ].map((s, i) => (
                 <div key={i} style={{ padding: '18px 14px', background: s.bg, border: `1px solid ${s.border}`, borderRadius: 12, textAlign: 'center' }}>
                   <div style={{ fontSize: '1.5rem', marginBottom: 6 }}>{s.icon}</div>
@@ -726,11 +726,11 @@ export default function AnalyticsShowcase() {
               <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.75rem', fontWeight: 700, color: 'var(--inkd)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Live click stream</span>
             </div>
             {[
-              { flag: <MapPin size={16}/>, country: 'San Francisco, US', device: 'iPhone 15',  browser: 'Safari',  time: 'just now', link: 'tinyhop-url.onrender.com/launch24' },
-              { flag: <MapPin size={16}/>, country: 'London, UK',        device: 'MacBook Pro', browser: 'Chrome',  time: '2s ago',   link: 'tinyhop-url.onrender.com/product' },
-              { flag: <MapPin size={16}/>, country: 'Berlin, DE',        device: 'Android',    browser: 'Firefox', time: '5s ago',   link: 'tinyhop-url.onrender.com/sale' },
-              { flag: <MapPin size={16}/>, country: 'Mumbai, IN',        device: 'iPad',        browser: 'Safari',  time: '8s ago',   link: 'tinyhop-url.onrender.com/launch24' },
-              { flag: <MapPin size={16}/>, country: 'Toronto, CA',       device: 'Windows PC', browser: 'Edge',    time: '11s ago',  link: 'tinyhop-url.onrender.com/grow' },
+              { flag: <MapPin size={16} color="#15141c" strokeWidth={2.5} />, country: 'San Francisco, US', device: 'iPhone 15',  browser: 'Safari',  time: 'just now', link: 'tinyhop-url.onrender.com/launch24' },
+              { flag: <MapPin size={16} color="#15141c" strokeWidth={2.5} />, country: 'London, UK',        device: 'MacBook Pro', browser: 'Chrome',  time: '2s ago',   link: 'tinyhop-url.onrender.com/product' },
+              { flag: <MapPin size={16} color="#15141c" strokeWidth={2.5} />, country: 'Berlin, DE',        device: 'Android',    browser: 'Firefox', time: '5s ago',   link: 'tinyhop-url.onrender.com/sale' },
+              { flag: <MapPin size={16} color="#15141c" strokeWidth={2.5} />, country: 'Mumbai, IN',        device: 'iPad',        browser: 'Safari',  time: '8s ago',   link: 'tinyhop-url.onrender.com/launch24' },
+              { flag: <MapPin size={16} color="#15141c" strokeWidth={2.5} />, country: 'Toronto, CA',       device: 'Windows PC', browser: 'Edge',    time: '11s ago',  link: 'tinyhop-url.onrender.com/grow' },
             ].map((row, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 20px', borderBottom: i < 4 ? '1px solid rgba(20,20,28,0.05)' : 'none', transition: 'background .15s' }}
                 onMouseEnter={e => e.currentTarget.style.background='var(--paper-2)'}
