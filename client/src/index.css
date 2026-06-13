@@ -1476,7 +1476,7 @@ img, svg { display: block; }
   .lp-hero { min-height: 100vh !important; padding: 0 !important; display: block !important; position: relative !important; overflow: hidden; }
   .lp-title-wrap { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) !important; width: 100% !important; margin: 0 !important; padding: 0 !important; z-index: 2; }
   .lp-block { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) skewY(-4deg) !important; width: 100vw !important; height: 38vh !important; z-index: 1; }
-  .lp-botanical { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) !important; height: 48vh !important; opacity: 0.25 !important; z-index: 0; }
+  .lp-botanical { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) !important; height: 50vh !important; z-index: 2 !important; }
   .lp-desc { position: absolute !important; top: 58% !important; left: 50% !important; transform: translateX(-50%) !important; width: 90% !important; max-width: 440px !important; text-align: center !important; margin: 0 !important; z-index: 10; opacity: 1; animation: none; }
 }
 @media (max-width: 560px) {

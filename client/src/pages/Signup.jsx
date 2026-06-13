@@ -349,7 +349,7 @@ export default function Signup() {
           </div>
 
           <p className="ap-legal" style={{ animation: 'fadeUp .6s var(--ease-out) 1.14s both' }}>
-            By creating an account you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            By creating an account you agree to our <Link to="/terms">Terms of Service</Link> and <Link to="/privacy">Privacy Policy</Link>.
           </p>
         </div>
       </div>

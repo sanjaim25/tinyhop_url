@@ -247,7 +247,7 @@ export default function Login() {
           </div>
 
           <p className="ap-legal" style={{ animation: 'fadeUp .6s var(--ease-out) 1s both' }}>
-            By continuing you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            By continuing you agree to our <Link to="/terms">Terms of Service</Link> and <Link to="/privacy">Privacy Policy</Link>.
           </p>
         </div>
       </div>
