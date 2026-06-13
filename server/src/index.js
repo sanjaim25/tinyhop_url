@@ -19,7 +19,9 @@ app.use(helmet({
 }))
 
 // 2. Strict CORS Configuration
-const allowedOrigins = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : ['http://localhost:5173']
+const allowedOrigins = process.env.CLIENT_URL 
+  ? process.env.CLIENT_URL.split(',').map(url => url.trim().replace(/\/$/, '')) 
+  : ['http://localhost:5173']
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
