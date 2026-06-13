@@ -1475,7 +1475,7 @@ img, svg { display: block; }
   .lp-circle { display: none !important; }
   .lp-hero { min-height: 100vh !important; padding: 0 !important; display: block !important; position: relative !important; overflow: hidden; }
   .lp-title-wrap { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) !important; width: 100% !important; margin: 0 !important; padding: 0 !important; z-index: 2; }
-  .lp-block { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) skewY(-4deg) !important; width: 100vw !important; height: 38vh !important; z-index: 1; }
+  .lp-block { position: absolute !important; top: 36% !important; left: 50% !important; transform: translate(-50%, -50%) skewY(-4deg) !important; width: 88vw !important; height: 28vh !important; z-index: 1; border-radius: 12px; }
   .lp-botanical { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) !important; height: 50vh !important; z-index: 2 !important; }
   .lp-desc { position: absolute !important; top: 58% !important; left: 50% !important; transform: translateX(-50%) !important; width: 90% !important; max-width: 440px !important; text-align: center !important; margin: 0 !important; z-index: 10; opacity: 1; animation: none; }
 }
@@ -1797,8 +1797,6 @@ img, svg { display: block; }
   .lp-title { font-size: clamp(3rem, 10vw, 4rem) !important; }
   .lp-stats { flex-direction: column !important; align-items: center !important; position: static !important; margin-top: 40px !important; }
   .lp-stat { margin-bottom: 16px !important; }
-  .lp-mini-form { flex-direction: column !important; border-radius: 12px !important; background: transparent !important; box-shadow: none !important; }
-  .lp-mini-input { background: var(--ink-3) !important; border-radius: 8px !important; margin-bottom: 8px !important; padding: 12px !important; width: 100% !important; border: 1px solid var(--b3) !important; }
-  .lp-mini-btn { width: 100% !important; border-radius: 8px !important; margin: 0 !important; padding: 12px !important; }
+  /* Removed lp-mini-form overrides to keep the pill shape design */
   #hero-circle-cta { display: none !important; }
 }
