@@ -76,7 +76,7 @@ export default function Footer() {
           </div>
 
           {/* Link columns */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px 56px', flex: 1, minWidth: 0 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '40px 24px', flex: 1, minWidth: 0, width: '100%' }}>
             {cols.map(col => (
               <div key={col.heading}>
                 <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: 18 }}>
