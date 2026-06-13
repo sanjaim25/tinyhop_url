@@ -13,7 +13,7 @@ const V = '#7c3aed', VD = '#6d28d9', INK = '#15141c'
 const LINE = 'rgba(20,20,28,0.1)', P2 = '#f5f3ef', P3 = '#e3e0d8'
 const GRN = '#16a34a', AMB = '#d97706', BLU = '#2563eb'
 const COLS = ['#7c3aed','#16a34a','#2563eb','#d97706','#ef4444','#9f67f5','#0891b2','#f97316']
-const base  = () => window.location.origin.replace(/:(5173|5174|5175|5176|5177)/, ':5000')
+const base  = () => import.meta.env.VITE_API_URL || 'http://localhost:5000'
 const domain = u => { try { return new URL(u).hostname } catch { return u } }
 const fmtD  = d => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 const fmtDT = d => new Date(d).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })

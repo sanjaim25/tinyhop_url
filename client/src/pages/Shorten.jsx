@@ -17,7 +17,7 @@ const AMB  = '#d97706'
 
 /* ── helpers ── */
 const shortBase = () =>
-  window.location.origin.replace(/:(5173|5174|5175|5176|5177)/, ':5000')
+  import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
 const domain = (u) => { try { return new URL(u).hostname } catch { return u } }
 const fmt    = (d) => new Date(d).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })

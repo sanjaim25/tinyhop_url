@@ -13,7 +13,7 @@ const P2 = '#f5f3ef'
 const GRN = '#16a34a'
 const RED = '#ef4444'
 
-const shortBase = () => window.location.origin.replace(/:(5173|5174|5175|5176|5177)/, ':5000')
+const shortBase = () => import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
 
 
