@@ -317,66 +317,6 @@ export default function BulkShorten() {
           </p>
         </div>
 
-        {/* CSV Format Info */}
-        <div style={{ maxWidth: 800, margin: '0 auto 32px', background: '#fff', border: `1px solid ${LINE}`, borderRadius: 16, padding: '20px 24px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-            <h3 style={{ fontSize: '0.875rem', fontWeight: 700, color: INK, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={V} strokeWidth="2.5">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="16" x2="12" y2="12"/>
-                <line x1="12" y1="8" x2="12.01" y2="8"/>
-              </svg>
-              CSV Format Instructions
-            </h3>
-            <button
-              onClick={() => {
-                const csvContent = 'URL,Custom Alias (optional)\nhttps://example.com/page1,my-link\nhttps://example.com/page2\nhttps://example.com/page3,another-alias\n'
-                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
-                const link = document.createElement('a')
-                link.href = URL.createObjectURL(blob)
-                link.download = 'bulk-urls-template.csv'
-                link.click()
-                toast.success('Template downloaded!')
-              }}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '6px 14px',
-                background: V,
-                color: '#fff',
-                border: 'none',
-                borderRadius: 8,
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                fontFamily: "'Space Grotesk',sans-serif",
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.background = VD}
-              onMouseLeave={(e) => e.currentTarget.style.background = V}
-            >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              Download Template
-            </button>
-          </div>
-          <p style={{ fontSize: '0.875rem', color: '#8d8b94', marginBottom: 12, lineHeight: 1.6 }}>
-            Your CSV file should have 2 columns (second column is optional):
-          </p>
-          <div style={{ background: P2, borderRadius: 8, padding: '12px 16px', fontFamily: "'Fragment Mono',monospace", fontSize: '0.75rem', color: INK }}>
-            <div><strong>URL, Custom Alias (optional)</strong></div>
-            <div>https://example.com/page1, my-link</div>
-            <div>https://example.com/page2</div>
-            <div>https://example.com/page3, another-alias</div>
-          </div>
-          <p style={{ fontSize: '0.75rem', color: '#8d8b94', marginTop: 10 }}>
-            • Maximum 1000 URLs per file • Custom aliases must be at least 3 characters • File size limit: 5MB
-          </p>
-        </div>
 
         {/* Upload Section */}
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
