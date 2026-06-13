@@ -37,6 +37,7 @@ app.use(cors({
 }))
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 // 3. Rate Limiting
 const apiLimiter = rateLimit({
@@ -63,7 +64,7 @@ app.use('/api/urls', urlRoutes)
 app.use('/api/analytics', analyticsRoutes)
 
 // 5. Core Redirect Feature
-app.get('/:code', async (req, res, next) => {
+const handleRedirect = async (req, res, next) => {
   const { code } = req.params
   try {
     const url = await prisma.url.findFirst({
@@ -83,14 +84,22 @@ app.get('/:code', async (req, res, next) => {
     }
 
     if (url.password) {
-      const pwd = req.query.pwd
+      const pwd = req.body.pwd || req.query.pwd
       if (pwd !== url.password) {
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private')
         return res.send(`
           <!DOCTYPE html>
           <html>
           <head><title>Password Protected</title><meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <style>body{background:#09090b;color:#fafafa;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.card{background:#18181b;border:1px solid #27272a;border-radius:20px;padding:40px;text-align:center}input{padding:10px;border-radius:5px;border:1px solid #555;margin-bottom:15px;background:#000;color:#fff}button{padding:10px 20px;cursor:pointer;background:#0052ff;color:#fff;border:none;border-radius:5px}</style></head>
-          <body><div class="card"><h1>Link Protected</h1><form method="GET" action=""><input type="password" name="pwd" placeholder="Enter password" autofocus /><br/><button type="submit">Unlock</button></form></div></body></html>
+          <body><div class="card"><h1>Link Protected</h1>
+          <form method="POST" action="">
+            <input type="password" name="pwd" placeholder="Enter password" autofocus />
+            <br/>
+            ${pwd !== undefined ? '<p style="color:#ef4444;font-size:14px;margin-top:0">Incorrect password</p>' : ''}
+            <button type="submit">Unlock</button>
+          </form>
+          </div></body></html>
         `)
       }
     }
@@ -132,7 +141,10 @@ app.get('/:code', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-})
+}
+
+app.get('/:code', handleRedirect)
+app.post('/:code', handleRedirect)
 
 // 7. Centralized Error Handler
 app.use((err, req, res, next) => {
