@@ -1472,12 +1472,12 @@ img, svg { display: block; }
 /* responsive editorial */
 @media (max-width: 900px) {
   .lp-rail, .lp-stats, .lp-scroll-cue { display: none; }
-  .lp-desc { position: static; max-width: 100%; margin-top: 24px; animation: none; opacity: 1; z-index: 10; position: relative; }
-  .lp-circle { bottom: var(--sp-8); right: var(--sp-5); width: 92px; height: 92px; }
-  .lp-hero { padding: 110px var(--sp-5) var(--sp-12); justify-content: center; min-height: auto; }
-  .lp-title-wrap { position: static !important; transform: none !important; margin: auto 0; padding-top: 20px; text-align: center; width: 100%; left: 0 !important; top: 0 !important; }
-  .lp-block { width: 90vw; height: 40vh; transform: translate(-50%, -50%) skewY(-4deg) !important; left: 50% !important; top: 40% !important; }
-  .lp-botanical { height: 52vh; opacity: 0.5; transform: translateX(-50%) !important; left: 50% !important; position: absolute; top: 20%; }
+  .lp-circle { display: none !important; }
+  .lp-hero { min-height: 100vh !important; padding: 0 !important; display: block !important; position: relative !important; overflow: hidden; }
+  .lp-title-wrap { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) !important; width: 100% !important; margin: 0 !important; padding: 0 !important; z-index: 2; }
+  .lp-block { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) skewY(-4deg) !important; width: 100vw !important; height: 38vh !important; z-index: 1; }
+  .lp-botanical { position: absolute !important; top: 32% !important; left: 50% !important; transform: translate(-50%, -50%) !important; height: 48vh !important; opacity: 0.25 !important; z-index: 0; }
+  .lp-desc { position: absolute !important; top: 58% !important; left: 50% !important; transform: translateX(-50%) !important; width: 90% !important; max-width: 440px !important; text-align: center !important; margin: 0 !important; z-index: 10; opacity: 1; animation: none; }
 }
 @media (max-width: 560px) {
   .lp-marquee-item { font-size: 1.1rem; }
@@ -1794,8 +1794,6 @@ img, svg { display: block; }
   .shorten-submit span { font-size: 1rem !important; }
   
   /* Landing page tweaks */
-  .lp-hero { padding: 100px 16px 60px !important; }
-  .lp-rail { display: none !important; }
   .lp-title { font-size: clamp(3rem, 10vw, 4rem) !important; }
   .lp-stats { flex-direction: column !important; align-items: center !important; position: static !important; margin-top: 40px !important; }
   .lp-stat { margin-bottom: 16px !important; }
