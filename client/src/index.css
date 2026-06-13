@@ -1471,13 +1471,13 @@ img, svg { display: block; }
 
 /* responsive editorial */
 @media (max-width: 900px) {
-  .lp-rail, .lp-stats { display: none; }
-  .lp-desc { position: static; max-width: 100%; margin-top: 24px; animation: none; opacity: 1; }
+  .lp-rail, .lp-stats, .lp-scroll-cue { display: none; }
+  .lp-desc { position: static; max-width: 100%; margin-top: 24px; animation: none; opacity: 1; z-index: 10; position: relative; }
   .lp-circle { bottom: var(--sp-8); right: var(--sp-5); width: 92px; height: 92px; }
-  .lp-hero { padding: 110px var(--sp-5) var(--sp-12); justify-content: center; }
-  .lp-title-wrap { position: static; transform: none; margin: auto 0; }
-  .lp-block { width: 86vw; height: 38vh; }
-  .lp-botanical { height: 52vh; opacity: 0.5; }
+  .lp-hero { padding: 110px var(--sp-5) var(--sp-12); justify-content: center; min-height: auto; }
+  .lp-title-wrap { position: static !important; transform: none !important; margin: auto 0; padding-top: 20px; text-align: center; width: 100%; left: 0 !important; top: 0 !important; }
+  .lp-block { width: 90vw; height: 40vh; transform: translate(-50%, -50%) skewY(-4deg) !important; left: 50% !important; top: 40% !important; }
+  .lp-botanical { height: 52vh; opacity: 0.5; transform: translateX(-50%) !important; left: 50% !important; position: absolute; top: 20%; }
 }
 @media (max-width: 560px) {
   .lp-marquee-item { font-size: 1.1rem; }
