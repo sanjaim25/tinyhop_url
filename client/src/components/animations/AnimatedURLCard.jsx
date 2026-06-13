@@ -24,7 +24,7 @@ export default function AnimatedURLCard({ url, index, onDelete, onCopy, onEdit, 
       <div className="url-card-header">
         <div style={{ flex: 1, minWidth: 0 }}>
           <motion.a
-            href={`${window.location.origin.replace('5173', '5000')}/${url.shortCode}`}
+            href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/${url.shortCode}`}
             target="_blank"
             rel="noopener noreferrer"
             className="url-short-link"

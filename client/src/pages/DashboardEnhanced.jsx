@@ -366,7 +366,8 @@ export default function Dashboard() {
   }
 
   const handleCopy = (url) => {
-    const short = `${window.location.origin.replace('5173', '5000')}/${url.shortCode}`
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+    const short = `${baseUrl}/${url.shortCode}`
     navigator.clipboard.writeText(short)
     toast.success('Copied to clipboard!')
   }

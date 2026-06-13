@@ -2,7 +2,8 @@ import { useState } from 'react'
 
 export default function UrlCard({ url, index, onDelete, onCopy, onEdit, onQR, onAnalytics }) {
   const [copied, setCopied] = useState(false)
-  const shortUrl = `${window.location.origin.replace('5173','5000')}/${url.shortCode}`
+  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+  const shortUrl = `${baseUrl}/${url.shortCode}`
   const clicks   = url.clickCount || 0
   const expired  = url.expiresAt && new Date(url.expiresAt) < new Date()
 

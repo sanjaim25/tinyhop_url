@@ -9,7 +9,8 @@ export default function QRModal({ url, onClose }) {
   const [size, setSize] = useState(256)
   const [copied, setCopied] = useState(false)
 
-  const shortUrl = `${window.location.origin.replace('5173','5000')}/${url.shortCode}`
+  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+  const shortUrl = `${baseUrl}/${url.shortCode}`
 
   const download = () => {
     const canvas = canvasRef.current?.querySelector('canvas')
