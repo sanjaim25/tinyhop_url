@@ -776,7 +776,7 @@ export default function Dashboard() {
                   transition: 'all 0.2s',
                 }}
               >
-                <span style={{display:"flex",alignItems:"center",gap:8}}><Paperclip size={18} color="#15141c" strokeWidth={2.5} /> Links</span>
+                <span style={{display:"flex",alignItems:"center",gap:8, whiteSpace:"nowrap"}}><Paperclip size={18} color="currentColor" strokeWidth={2.5} /> Links</span>
               </button>
               <button
                 onClick={() => { setViewMode('batches'); setPage(1); setSelectedBatch(null) }}
@@ -793,7 +793,7 @@ export default function Dashboard() {
                   transition: 'all 0.2s',
                 }}
               >
-                <span style={{display:"flex",alignItems:"center",gap:8}}><Package size={18} color="#15141c" strokeWidth={2.5} /> Batches (</span>{batches.length})
+                <span style={{display:"flex",alignItems:"center",gap:8, whiteSpace:"nowrap"}}><Package size={18} color="currentColor" strokeWidth={2.5} /> Batches ({batches.length})</span>
               </button>
             </div>
             <div style={{ position: 'relative' }}>
