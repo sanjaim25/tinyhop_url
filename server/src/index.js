@@ -18,10 +18,13 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false
 }))
 
+// Enable trust proxy so rate limiting works behind Render's load balancers
+app.set('trust proxy', 1)
+
 // 2. Strict CORS Configuration
 const allowedOrigins = process.env.CLIENT_URL 
   ? process.env.CLIENT_URL.split(',').map(url => url.trim().replace(/\/$/, '')) 
-  : ['http://localhost:5173']
+  : ['http://localhost:5173', 'https://tinyhop-url.vercel.app']
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
