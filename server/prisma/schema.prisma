@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String      @id @default(cuid())
+  name       String?
+  email      String      @unique
+  password   String
+  createdAt  DateTime    @default(now())
+  workspaces Workspace[]
+  urls       Url[]
+  batches    Batch[]
+}
+
+model Batch {
+  id          String   @id @default(cuid())
+  name        String
+  totalUrls   Int      @default(0)
+  successful  Int      @default(0)
+  failed      Int      @default(0)
+  createdAt   DateTime @default(now())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  urls        Url[]
+
+  @@index([userId])
+}
+
+model Workspace {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  urls      Url[]
+  campaigns Campaign[]
+  domains   Domain[]
+
+  @@index([userId])
+}
+
+model Domain {
+  id          String    @id @default(cuid())
+  hostname    String    @unique
+  verified    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+}
+
+model Campaign {
+  id          String    @id @default(cuid())
+  name        String
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  createdAt   DateTime  @default(now())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  urls        Url[]
+
+  @@index([workspaceId])
+}
+
+model Url {
+  id           String    @id @default(cuid())
+  shortCode    String    @unique
+  originalUrl  String
+  customAlias  String?   @unique
+  expiresAt    DateTime?
+  clickCount   Int       @default(0)
+  createdAt    DateTime  @default(now())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspaceId  String?
+  workspace    Workspace? @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  campaignId   String?
+  campaign     Campaign?  @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  batchId      String?
+  batch        Batch?     @relation(fields: [batchId], references: [id], onDelete: SetNull)
+  visits       Visit[]
+  
+  title        String?
+  description  String?
+  password     String?
+  tags         String[]  @default([])
+  geoRouting   Json?     
+  deviceRouting Json?    
+  qrConfig     Json?     
+  linkInBioId  String?
+  linkInBio    LinkInBio? @relation(fields: [linkInBioId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([workspaceId])
+  @@index([campaignId])
+  @@index([batchId])
+}
+
+model LinkInBio {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  bio         String?
+  avatarUrl   String?
+  theme       String   @default("mono")
+  socials     Json?    
+  createdAt   DateTime @default(now())
+  urls        Url[]
+}
+
+model Visit {
+  id         String   @id @default(cuid())
+  visitedAt  DateTime @default(now())
+  urlId      String
+  url        Url      @relation(fields: [urlId], references: [id], onDelete: Cascade)
+  country    String   @default("Unknown")
+  city       String   @default("Unknown")
+  device     String   @default("Desktop")
+  browser    String   @default("Unknown")
+  referer    String   @default("Direct")
+
+  @@index([urlId])
+  @@index([visitedAt])
+}
