@@ -77,37 +77,9 @@ const handleRedirect = async (req, res, next) => {
       return res.status(410).send(`
         <!DOCTYPE html>
         <html>
-        <head>
-          <title>Link Expired | TinyHop</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-          <style>
-            body{background:#eceae4;color:#15141c;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;position:relative}
-            body::before{content:"";position:absolute;inset:0;opacity:0.04;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
-            .card-wrapper{position:relative;z-index:1;width:100%;max-width:420px;padding:0 20px;box-sizing:border-box}
-            .card{background:#fff;border:1px solid rgba(20,20,28,0.1);border-radius:24px;padding:48px 40px;text-align:center;box-shadow:0 12px 48px rgba(20,20,28,0.08);position:relative;overflow:hidden}
-            .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#ef4444,#b91c1c)}
-            .icon-wrapper{width:56px;height:56px;background:rgba(239,68,68,0.1);color:#ef4444;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
-            h1{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin:0 0 12px;color:#15141c;letter-spacing:-0.02em}
-            p.subtitle{font-size:0.95rem;color:#8d8b94;margin:0;line-height:1.5}
-          </style>
-        </head>
-        <body>
-          <div class="card-wrapper">
-            <div class="card">
-              <div class="icon-wrapper">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-              </div>
-              <h1>Link Expired</h1>
-              <p class="subtitle">This link is no longer accessible.<br/>The creator has set it to expire.</p>
-            </div>
-          </div>
-        </body>
-        </html>
+        <head><title>Link Expired</title><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>body{background:#09090b;color:#fafafa;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.card{background:#18181b;border:1px solid #27272a;border-radius:20px;padding:40px;text-align:center}h1{color:#ef4444}</style></head>
+        <body><div class="card"><h1>Link Expired</h1><p>This link is no longer accessible.</p></div></body></html>
       `)
     }
 
@@ -118,52 +90,16 @@ const handleRedirect = async (req, res, next) => {
         return res.send(`
           <!DOCTYPE html>
           <html>
-          <head>
-            <title>Protected Link | TinyHop</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-            <style>
-              body{background:#eceae4;color:#15141c;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;position:relative}
-              body::before{content:"";position:absolute;inset:0;opacity:0.04;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
-              .card-wrapper{position:relative;z-index:1;width:100%;max-width:420px;padding:0 20px;box-sizing:border-box}
-              .card{background:#fff;border:1px solid rgba(20,20,28,0.1);border-radius:24px;padding:48px 40px;text-align:center;box-shadow:0 12px 48px rgba(20,20,28,0.08);position:relative;overflow:hidden}
-              .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#7c3aed,#6d28d9)}
-              .icon-wrapper{width:56px;height:56px;background:rgba(124,58,237,0.1);color:#7c3aed;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
-              h1{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin:0 0 12px;color:#15141c;letter-spacing:-0.02em}
-              p.subtitle{font-size:0.95rem;color:#8d8b94;margin:0 0 32px;line-height:1.5}
-              input{width:100%;padding:16px;border-radius:12px;border:1px solid rgba(20,20,28,0.15);background:#fff;color:#15141c;font-family:'Space Grotesk',sans-serif;font-size:1rem;box-sizing:border-box;transition:all 0.2s;margin-bottom:20px}
-              input:focus{outline:none;border-color:#7c3aed;box-shadow:0 0 0 4px rgba(124,58,237,0.1)}
-              button{width:100%;padding:16px;cursor:pointer;background:#15141c;color:#eceae4;border:none;border-radius:12px;font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
-              button:hover{background:#7c3aed;transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,0.25)}
-              .error{color:#ef4444;font-size:0.875rem;margin-top:-12px;margin-bottom:20px;font-weight:600;text-align:left}
-            </style>
-          </head>
-          <body>
-            <div class="card-wrapper">
-              <div class="card">
-                <div class="icon-wrapper">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg>
-                </div>
-                <h1>Protected Link</h1>
-                <p class="subtitle">This URL is password protected.<br/>Please enter the password to continue.</p>
-                <form method="POST" action="">
-                  <input type="password" name="pwd" placeholder="Enter password" autofocus required />
-                  ${pwd !== undefined ? '<div class="error">Incorrect password</div>' : ''}
-                  <button type="submit">
-                    Unlock Link
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </button>
-                </form>
-              </div>
-            </div>
-          </body>
-          </html>
+          <head><title>Password Protected</title><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <style>body{background:#09090b;color:#fafafa;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.card{background:#18181b;border:1px solid #27272a;border-radius:20px;padding:40px;text-align:center}input{padding:10px;border-radius:5px;border:1px solid #555;margin-bottom:15px;background:#000;color:#fff}button{padding:10px 20px;cursor:pointer;background:#0052ff;color:#fff;border:none;border-radius:5px}</style></head>
+          <body><div class="card"><h1>Link Protected</h1>
+          <form method="POST" action="">
+            <input type="password" name="pwd" placeholder="Enter password" autofocus />
+            <br/>
+            ${pwd !== undefined ? '<p style="color:#ef4444;font-size:14px;margin-top:0">Incorrect password</p>' : ''}
+            <button type="submit">Unlock</button>
+          </form>
+          </div></body></html>
         `)
       }
     }

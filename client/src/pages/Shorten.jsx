@@ -196,7 +196,7 @@ export default function Shorten() {
             <span style={{ width:6, height:6, borderRadius:'50%', background:GRN }} />
             <span style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'0.62rem', fontWeight:600, letterSpacing:'0.12em', textTransform:'uppercase', color:V }}>URL Shortener</span>
           </div>
-          <h1 style={{ fontFamily:"'Playfair Display',serif", fontSize:'clamp(2.5rem,6vw,4.5rem)', fontWeight:900, letterSpacing:'-0.04em', lineHeight:0.93, color:INK, marginBottom:14 }}>
+          <h1 className="shorten-title" style={{ fontFamily:"'Playfair Display',serif", fontSize:'clamp(2.5rem,6vw,4.5rem)', fontWeight:900, letterSpacing:'-0.04em', lineHeight:0.93, color:INK, marginBottom:14 }}>
             Make it <em style={{ fontStyle:'italic', color:V }}>short.</em>
           </h1>
           <p style={{ fontSize:'1rem', color:'#8d8b94', maxWidth:580, margin:'0 auto', lineHeight:1.65 }}>
@@ -212,7 +212,7 @@ export default function Shorten() {
             <div style={{ background:'#fff', border:`1px solid ${LINE}`, borderRadius:22, overflow:'hidden', boxShadow:'0 6px 32px rgba(20,20,28,0.09)', animation:'scaleSpring .5s cubic-bezier(0.34,1.56,0.64,1) .05s both' }}>
               <div style={{ height:3, background:`linear-gradient(90deg,${V},${VD})` }} />
 
-              <form onSubmit={submit} style={{ padding:'32px 40px' }}>
+              <form onSubmit={submit} className="shorten-form-container" style={{ padding:'32px 40px' }}>
                 {/* URL input */}
                 <div style={{ marginBottom:20 }}>
                   <Field label="Long URL">
@@ -238,9 +238,9 @@ export default function Shorten() {
                   {/* Custom alias */}
                   <Field label="Custom alias" hint="optional">
                     <div style={{ position:'relative' }}>
-                      <span style={{ position:'absolute', left:16, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.8125rem', color:'#b0adb8', pointerEvents:'none', whiteSpace:'nowrap', fontWeight:500, zIndex:1, userSelect:'none' }}>tinyhop-url.onrender.com/</span>
-                      {!alias && <span style={{ position:'absolute', left:215, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.875rem', color:'#b0adb8', pointerEvents:'none', fontWeight:400 }}>my-brand</span>}
-                      <input type="text" value={alias} placeholder="" onChange={e => { setAlias(e.target.value); setAliasError('') }}
+                      <span className="shorten-alias-prefix" style={{ position:'absolute', left:16, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.8125rem', color:'#b0adb8', pointerEvents:'none', whiteSpace:'nowrap', fontWeight:500, zIndex:1, userSelect:'none' }}>tinyhop-url.onrender.com/</span>
+                      {!alias && <span className="shorten-alias-placeholder" style={{ position:'absolute', left:215, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.875rem', color:'#b0adb8', pointerEvents:'none', fontWeight:400 }}>my-brand</span>}
+                      <input className="shorten-alias-input" type="text" value={alias} placeholder="" onChange={e => { setAlias(e.target.value); setAliasError('') }}
                         style={{ ...inputStyle(!!aliasError), paddingLeft:215, fontFamily:"'Fragment Mono',monospace", fontSize:'0.875rem' }}
                         onFocus={focusIn} onBlur={e => focusOut(e, !!aliasError)}
                         autoComplete="off"
@@ -427,7 +427,7 @@ export default function Shorten() {
 
           {/* Session stats */}
           {history.length > 0 && (
-            <div style={{ display:'flex', gap:10, marginTop: 24, animation:'fadeUp .4s cubic-bezier(0.16,1,0.3,1) .1s both' }}>
+            <div className="shorten-stats" style={{ display:'flex', gap:10, marginTop: 24, animation:'fadeUp .4s cubic-bezier(0.16,1,0.3,1) .1s both' }}>
               <StatPill icon={<LinkIcon size={18} color="#15141c" strokeWidth={2.5} />} value={history.length} label="Links created" color={V} />
               <StatPill icon={<Pointer size={18} color="#15141c" strokeWidth={2.5} />} value={totalClicks} label="Total clicks" color={GRN} />
               <StatPill icon={<Zap size={18} color="#15141c" strokeWidth={2.5} />} value="Live" label="Tracking" color={AMB} />

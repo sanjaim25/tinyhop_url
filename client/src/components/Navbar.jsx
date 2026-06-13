@@ -72,7 +72,7 @@ export default function Navbar() {
 
         {/* ── Centre nav links — centered in the bar ── */}
         {!isLanding && user && (
-          <ul style={{
+          <ul className="nav-center-links" style={{
             listStyle: 'none', display: 'flex', alignItems: 'center', gap: 2,
             margin: 0, padding: 0,
             position: 'absolute', left: '50%', transform: 'translateX(-50%)',

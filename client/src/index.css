@@ -1773,3 +1773,34 @@ img, svg { display: block; }
   display: none; align-items: center; gap: 9px; margin-bottom: 32px;
 }
 @media (max-width: 860px) { .ap-mobile-logo { display: flex; } }
+
+/* ============================================================
+   MOBILE RESPONSIVENESS TWEAKS
+   ============================================================ */
+@media (max-width: 768px) {
+  .nav-center-links { display: none !important; }
+  .nav-cta-text { display: none !important; }
+  #nav-new-link-btn { font-size: 0 !important; padding: 7px 10px !important; gap: 0 !important; }
+  #nav-new-link-btn svg { margin: 0 !important; }
+  
+  /* Shorten Page */
+  .shorten-form-container { padding: 24px 20px !important; }
+  .shorten-alias-prefix { display: none !important; }
+  .shorten-alias-input { padding-left: 14px !important; }
+  .shorten-alias-placeholder { display: none !important; }
+  .shorten-title { font-size: 2.5rem !important; }
+  .shorten-desc { padding: 0 16px !important; }
+  .shorten-stats { flex-direction: column !important; }
+  .shorten-submit span { font-size: 1rem !important; }
+  
+  /* Landing page tweaks */
+  .lp-hero { padding: 100px 16px 60px !important; }
+  .lp-rail { display: none !important; }
+  .lp-title { font-size: clamp(3rem, 10vw, 4rem) !important; }
+  .lp-stats { flex-direction: column !important; align-items: center !important; position: static !important; margin-top: 40px !important; }
+  .lp-stat { margin-bottom: 16px !important; }
+  .lp-mini-form { flex-direction: column !important; border-radius: 12px !important; background: transparent !important; box-shadow: none !important; }
+  .lp-mini-input { background: var(--ink-3) !important; border-radius: 8px !important; margin-bottom: 8px !important; padding: 12px !important; width: 100% !important; border: 1px solid var(--b3) !important; }
+  .lp-mini-btn { width: 100% !important; border-radius: 8px !important; margin: 0 !important; padding: 12px !important; }
+  #hero-circle-cta { display: none !important; }
+}
