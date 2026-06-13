@@ -1,10 +1,10 @@
+import { Pointer, Zap, Link as LinkIcon, TrendingUp, Search, SlidersHorizontal, Plus, BarChart3 } from 'lucide-react'
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '../context/AuthContext'
 import api from '../api/axios'
 import toast from 'react-hot-toast'
-import { Search, SlidersHorizontal, Plus, BarChart3 } from 'lucide-react'
 
 // Import new animated components
 import AnimatedStats from '../components/animations/AnimatedStats'
@@ -49,7 +49,7 @@ function CreateModal({ onClose, onCreated }) {
       if (form.customCode.trim()) payload.customCode = form.customCode.trim()
       if (form.expiresAt) payload.expiresAt = new Date(form.expiresAt).toISOString()
       const res = await api.post('/api/urls', payload)
-      toast.success('Link created! 🎉')
+      toast.success('Link created!')
       onCreated(res.data)
       onClose()
     } catch (err) {
@@ -451,10 +451,10 @@ export default function Dashboard() {
       <div className="dashboard-content">
         {/* Stats */}
         <div className="grid-4" style={{ marginBottom: 32 }}>
-          <AnimatedStats icon="🔗" label="Total Links" value={urls.length} change={12} color="#0052ff" delay={0} />
-          <AnimatedStats icon="👆" label="Total Clicks" value={totalClicks} change={8} color="#10d878" delay={0.1} />
-          <AnimatedStats icon="📈" label="Avg. CTR" value={urls.length ? ((totalClicks / urls.length) || 0).toFixed(1) : 0} color="#f5a623" delay={0.2} />
-          <AnimatedStats icon="⚡" label="Active Links" value={urls.filter(u => !u.expiresAt || new Date(u.expiresAt) > new Date()).length} color="#a78bfa" delay={0.3} />
+          <AnimatedStats icon={<LinkIcon size={20}/>} label="Total Links" value={urls.length} change={12} color="#0052ff" delay={0} />
+          <AnimatedStats icon={<Pointer size={20}/>} label="Total Clicks" value={totalClicks} change={8} color="#10d878" delay={0.1} />
+          <AnimatedStats icon={<TrendingUp size={20}/>} label="Avg. CTR" value={urls.length ? ((totalClicks / urls.length) || 0).toFixed(1) : 0} color="#f5a623" delay={0.2} />
+          <AnimatedStats icon={<Zap size={20}/>} label="Active Links" value={urls.filter(u => !u.expiresAt || new Date(u.expiresAt) > new Date()).length} color="#a78bfa" delay={0.3} />
         </div>
 
         {/* Analytics Banner */}
@@ -508,7 +508,7 @@ export default function Dashboard() {
             className="empty-state"
           >
             <div className="empty-state-icon">
-              {search ? '🔍' : '🔗'}
+              {search ? <Search size={28}/> : <LinkIcon size={28}/>}
             </div>
             <div className="empty-state-title">
               {search ? 'No links found' : 'No links yet'}

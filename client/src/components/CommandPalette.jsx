@@ -1,3 +1,4 @@
+import { BarChart2, TrendingUp, Smartphone, Brain, Users, Settings, Link, Search, QrCode, Target, Globe } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 
 export default function CommandPalette({ isOpen, onClose, onSelectAction, urls = [] }) {
@@ -39,17 +40,17 @@ export default function CommandPalette({ isOpen, onClose, onSelectAction, urls =
   }, [isOpen, selectedIndex, search])
 
   const navigationItems = [
-    { type: 'nav', label: 'Go to Dashboard', action: 'dashboard', icon: '📊' },
-    { type: 'nav', label: 'Go to Link Manager', action: 'links', icon: '🔗' },
-    { type: 'nav', label: 'Go to Analytics Engine', action: 'analytics', icon: '📈' },
-    { type: 'nav', label: 'Go to QR Code Studio', action: 'qr', icon: '🔲' },
-    { type: 'nav', label: 'Go to Link-in-Bio Builder', action: 'bio', icon: '📱' },
-    { type: 'nav', label: 'Go to UTM Campaigns', action: 'campaigns', icon: '🎯' },
-    { type: 'nav', label: 'Go to AI workspace Co-pilot', action: 'ai', icon: '🧠' },
-    { type: 'nav', label: 'Go to Developer API Keys', action: 'api', icon: '⚙️' },
-    { type: 'nav', label: 'Go to Workspaces Settings', action: 'team', icon: '👥' },
-    { type: 'nav', label: 'Go to Branded Domains', action: 'domains', icon: '🌐' },
-    { type: 'nav', label: 'Go to Settings', action: 'settings', icon: '🛠️' },
+    { type: 'nav', label: 'Go to Dashboard', action: 'dashboard', icon: <BarChart2 size={16}/> },
+    { type: 'nav', label: 'Go to Link Manager', action: 'links', icon: <Link size={16}/> },
+    { type: 'nav', label: 'Go to Analytics Engine', action: 'analytics', icon: <TrendingUp size={16}/> },
+    { type: 'nav', label: 'Go to QR Code Studio', action: 'qr', icon: <QrCode size={16}/> },
+    { type: 'nav', label: 'Go to Link-in-Bio Builder', action: 'bio', icon: <Smartphone size={16}/> },
+    { type: 'nav', label: 'Go to UTM Campaigns', action: 'campaigns', icon: <Target size={16}/> },
+    { type: 'nav', label: 'Go to AI workspace Co-pilot', action: 'ai', icon: <Brain size={16}/> },
+    { type: 'nav', label: 'Go to Developer API Keys', action: 'api', icon: <Settings size={16}/> },
+    { type: 'nav', label: 'Go to Workspaces Settings', action: 'team', icon: <Users size={16}/> },
+    { type: 'nav', label: 'Go to Branded Domains', action: 'domains', icon: <Globe size={16}/> },
+    { type: 'nav', label: 'Go to Settings', action: 'settings', icon: <Settings size={16}/> },
   ]
 
   const urlItems = urls.map((u) => ({
@@ -57,7 +58,7 @@ export default function CommandPalette({ isOpen, onClose, onSelectAction, urls =
     label: u.customAlias || u.shortCode,
     subtitle: u.originalUrl,
     action: `url-${u.id}`,
-    icon: '🔗'
+    icon: <Link size={16}/>
   }))
 
   const allItems = [...navigationItems, ...urlItems]
@@ -90,7 +91,7 @@ export default function CommandPalette({ isOpen, onClose, onSelectAction, urls =
       <div className="relative w-full max-w-2xl bg-zinc-900/90 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-150">
         {/* Search header */}
         <div className="flex items-center gap-3 border-b border-zinc-800 px-5 py-4">
-          <span className="text-xl text-zinc-500">🔍</span>
+          <span className="text-xl text-zinc-500"><Search size={20}/></span>
           <input
             ref={inputRef}
             type="text"

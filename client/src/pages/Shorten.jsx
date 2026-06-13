@@ -1,3 +1,4 @@
+import { Lock, Pointer, Link as LinkIcon, Smartphone, Clock, Zap } from 'lucide-react'
 import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
@@ -359,7 +360,7 @@ export default function Shorten() {
                   {['result','qr'].map(t => (
                     <button key={t} onClick={() => setActiveTab(t)}
                       style={{ flex:1, padding:'12px', border:'none', background: activeTab===t ? '#fff' : P2, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.8125rem', fontWeight: activeTab===t ? 700 : 500, color: activeTab===t ? V : '#8d8b94', cursor:'pointer', transition:'all .15s', borderBottom: activeTab===t ? `2px solid ${V}` : '2px solid transparent' }}>
-                      {t === 'result' ? '🔗 Short Link' : '📱 QR Code'}
+                      {t === 'result' ? '<span style={{display:"flex",alignItems:"center",gap:6}}><LinkIcon size={16}/> Short Link</span>' : '<span style={{display:"flex",alignItems:"center",gap:6}}><Smartphone size={16}/> QR Code</span>'}
                     </button>
                   ))}
                 </div>
@@ -392,8 +393,8 @@ export default function Shorten() {
                     </div>
                     {/* Meta badges */}
                     <div style={{ display:'flex', flexWrap:'wrap', gap:7, marginTop:14 }}>
-                      {result.expiresAt && <span style={{ padding:'3px 10px', background:AMB+'15', border:`1px solid ${AMB}30`, borderRadius:99, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.7rem', fontWeight:600, color:AMB }}>⏰ Expires {fmtD(result.expiresAt)}</span>}
-                      {result.password  && <span style={{ padding:'3px 10px', background:`${V}10`, border:`1px solid ${V}25`, borderRadius:99, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.7rem', fontWeight:600, color:V }}>🔒 Password protected</span>}
+                      {result.expiresAt && <span style={{ padding:'3px 10px', background:AMB+'15', border:`1px solid ${AMB}30`, borderRadius:99, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.7rem', fontWeight:600, color:AMB }}><span style={{display:"flex",alignItems:"center",gap:4}}><Clock size={14}/> Expires </span>{fmtD(result.expiresAt)}</span>}
+                      {result.password  && <span style={{ padding:'3px 10px', background:`${V}10`, border:`1px solid ${V}25`, borderRadius:99, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.7rem', fontWeight:600, color:V }}><span style={{display:"flex",alignItems:"center",gap:4}}><Lock size={12}/> Password protected</span></span>}
                       <span style={{ padding:'3px 10px', background:`${GRN}10`, border:`1px solid ${GRN}25`, borderRadius:99, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.7rem', fontWeight:600, color:GRN }}>✓ Active</span>
                     </div>
                   </div>
@@ -427,9 +428,9 @@ export default function Shorten() {
           {/* Session stats */}
           {history.length > 0 && (
             <div style={{ display:'flex', gap:10, marginTop: 24, animation:'fadeUp .4s cubic-bezier(0.16,1,0.3,1) .1s both' }}>
-              <StatPill icon="🔗" value={history.length} label="Links created" color={V} />
-              <StatPill icon="👆" value={totalClicks} label="Total clicks" color={GRN} />
-              <StatPill icon="⚡" value="Live" label="Tracking" color={AMB} />
+              <StatPill icon={<LinkIcon size={18}/>} value={history.length} label="Links created" color={V} />
+              <StatPill icon={<Pointer size={18}/>} value={totalClicks} label="Total clicks" color={GRN} />
+              <StatPill icon={<Zap size={18}/>} value="Live" label="Tracking" color={AMB} />
             </div>
           )}
 

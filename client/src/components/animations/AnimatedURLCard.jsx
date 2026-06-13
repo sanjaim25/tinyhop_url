@@ -1,5 +1,5 @@
+import { Calendar, Clock, Copy, QrCode, BarChart3, Edit, Trash2, ExternalLink } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { Copy, QrCode, BarChart3, Edit, Trash2, ExternalLink } from 'lucide-react'
 import { useState } from 'react'
 
 export default function AnimatedURLCard({ url, index, onDelete, onCopy, onEdit, onQR, onAnalytics }) {
@@ -78,11 +78,11 @@ export default function AnimatedURLCard({ url, index, onDelete, onCopy, onEdit, 
           {' '}clicks
         </div>
         <div className="url-meta-item">
-          📅 {new Date(url.createdAt).toLocaleDateString()}
+          <Calendar size={14}/> {new Date(url.createdAt).toLocaleDateString()}
         </div>
         {url.expiresAt && (
           <div className="url-meta-item">
-            ⏰ Expires {new Date(url.expiresAt).toLocaleDateString()}
+            <Clock size={14}/> Expires {new Date(url.expiresAt).toLocaleDateString()}
           </div>
         )}
       </div>

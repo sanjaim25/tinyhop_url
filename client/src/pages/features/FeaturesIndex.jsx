@@ -1,3 +1,4 @@
+import { BarChart2, Smartphone, Zap, Target, Clock, Globe } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../../components/Footer'
@@ -43,12 +44,12 @@ function DrawLine({ color = 'var(--inkd)', delay = 0 }) {
 }
 
 const FEATURES = [
-  { n: '01', label: 'Link Shortening', title: 'Instantly shorter. Infinitely smarter.', body: 'Paste any URL, get a clean branded link in milliseconds. Every short link comes with a full analytics dashboard, QR code, and custom alias.', to: '/features/link-shortening', accent: '#7c3aed', icon: '⚡' },
-  { n: '02', label: 'Real-Time Analytics', title: 'Every click tells a story.', body: 'Watch live traffic as it happens. Country, city, device, browser — every signal captured and visualized the moment someone taps your link.', to: '/features/analytics', accent: '#16a34a', icon: '📊' },
-  { n: '03', label: 'Custom Aliases', title: 'Your brand in every link.', body: 'tinyhop-url.onrender.com/launch24 earns 3× more clicks than tinyhop-url.onrender.com/xK9pQ. Memorable slugs build trust, reinforce campaigns, and work beautifully in print.', to: '/features/custom-aliases', accent: '#6d28d9', icon: '🎯' },
-  { n: '04', label: 'QR Code Generator', title: 'Bridge print and digital.', body: 'Every link gets a scannable QR code — custom colours, sizes, and styles. Scans flow into your analytics exactly like link clicks.', to: '/features/qr-codes', accent: '#7c3aed', icon: '📱' },
-  { n: '05', label: 'Link Expiry', title: 'Links that know when to stop.', body: 'Flash sales end. Events close. Your links should too. Set exact expiry dates down to the minute — with clean, branded expiry pages.', to: '/features/link-expiry', accent: '#5b21b6', icon: '⏰' },
-  { n: '06', label: 'Smart Routing', title: 'One link. Six continents.', body: 'Route by country or device type. Send French visitors to the French page, mobile users to the app download — from a single short link.', to: '/features/smart-routing', accent: '#7c3aed', icon: '🌍' },
+  { n: '01', label: 'Link Shortening', title: 'Instantly shorter. Infinitely smarter.', body: 'Paste any URL, get a clean branded link in milliseconds. Every short link comes with a full analytics dashboard, QR code, and custom alias.', to: '/features/link-shortening', accent: '#7c3aed', icon: <Zap size={24}/> },
+  { n: '02', label: 'Real-Time Analytics', title: 'Every click tells a story.', body: 'Watch live traffic as it happens. Country, city, device, browser — every signal captured and visualized the moment someone taps your link.', to: '/features/analytics', accent: '#16a34a', icon: <BarChart2 size={24}/> },
+  { n: '03', label: 'Custom Aliases', title: 'Your brand in every link.', body: 'tinyhop-url.onrender.com/launch24 earns 3× more clicks than tinyhop-url.onrender.com/xK9pQ. Memorable slugs build trust, reinforce campaigns, and work beautifully in print.', to: '/features/custom-aliases', accent: '#6d28d9', icon: <Target size={24}/> },
+  { n: '04', label: 'QR Code Generator', title: 'Bridge print and digital.', body: 'Every link gets a scannable QR code — custom colours, sizes, and styles. Scans flow into your analytics exactly like link clicks.', to: '/features/qr-codes', accent: '#7c3aed', icon: <Smartphone size={24}/> },
+  { n: '05', label: 'Link Expiry', title: 'Links that know when to stop.', body: 'Flash sales end. Events close. Your links should too. Set exact expiry dates down to the minute — with clean, branded expiry pages.', to: '/features/link-expiry', accent: '#5b21b6', icon: <Clock size={24}/> },
+  { n: '06', label: 'Smart Routing', title: 'One link. Six continents.', body: 'Route by country or device type. Send French visitors to the French page, mobile users to the app download — from a single short link.', to: '/features/smart-routing', accent: '#7c3aed', icon: <Globe size={24}/> },
 ]
 
 const PAD = 'max(32px, calc((100vw - 1100px)/2 + 32px))'

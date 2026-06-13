@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
 import { TrendingUp, TrendingDown } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 function AnimatedNumber({ value }) {

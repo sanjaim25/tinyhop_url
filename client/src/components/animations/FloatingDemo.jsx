@@ -1,5 +1,5 @@
+import { Link, BarChart3, Globe, TrendingUp } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { BarChart3, Globe, TrendingUp } from 'lucide-react'
 
 export default function FloatingDemo() {
   return (
@@ -47,7 +47,7 @@ export default function FloatingDemo() {
               fontSize: 13
             }}
           >
-            🔗
+            <Link size={18}/>
           </motion.div>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-brand)', fontFamily: 'var(--font-mono)' }}>

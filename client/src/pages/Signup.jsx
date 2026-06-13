@@ -116,7 +116,7 @@ export default function Signup() {
     try {
       const res = await api.post('/api/auth/signup', { name: form.name, email: form.email, password: form.password })
       login(res.data.user, res.data.token)
-      toast.success('Account created! Welcome to TinyHop 🎉')
+      toast.success('Account created! Welcome to TinyHop')
       navigate('/dashboard')
     } catch (err) {
       const msg = err.response?.data?.error || 'Signup failed. Please try again.'

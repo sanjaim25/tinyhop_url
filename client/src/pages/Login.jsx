@@ -75,7 +75,7 @@ export default function Login() {
     try {
       const res = await api.post('/api/auth/login', form)
       login(res.data.user, res.data.token)
-      toast.success(`Welcome back, ${res.data.user.name || res.data.user.email.split('@')[0]} 👋`)
+      toast.success(`Welcome back, ${res.data.user.name || res.data.user.email.split('@')[0]}`)
       navigate('/dashboard')
     } catch (err) {
       const msg = err.response?.data?.error || 'Login failed. Check your credentials.'

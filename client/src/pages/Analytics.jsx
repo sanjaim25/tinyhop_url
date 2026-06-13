@@ -1,3 +1,4 @@
+import { Pointer, CheckCircle, TrendingUp, Clock, Globe, Smartphone, Tablet, Monitor, Link as LinkIcon, ClipboardList, Zap, Inbox, BarChart2, Trophy } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import api from '../api/axios'
@@ -155,17 +156,17 @@ export default function Analytics() {
           <>
             {/* ── BIG STATS ROW ── */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(170px,1fr))', gap: 14, marginBottom: 22 }}>
-              <BigStat icon="🔗" label="Total Links"      value={data.totalLinks}            color={V}    delay={0}   sub="in workspace" />
-              <BigStat icon="👆" label="Total Clicks"     value={total.toLocaleString()}     color={GRN}  delay={60}  sub="all time" />
-              <BigStat icon="📈" label="Avg Clicks/Link"  value={data.avgClicksPerLink}      color={AMB}  delay={120} sub="per link" />
-              <BigStat icon="✅" label="Active Links"     value={data.activeLinks}           color={BLU}  delay={180} sub={`of ${data.totalLinks}`} />
-              <BigStat icon="⏰" label="Expired Links"    value={data.expiredLinks}          color="#9f67f5" delay={240} sub="past deadline" />
+              <BigStat icon={<LinkIcon size={20}/>} label="Total Links"      value={data.totalLinks}            color={V}    delay={0}   sub="in workspace" />
+              <BigStat icon={<Pointer size={20}/>} label="Total Clicks"     value={total.toLocaleString()}     color={GRN}  delay={60}  sub="all time" />
+              <BigStat icon={<TrendingUp size={20}/>} label="Avg Clicks/Link"  value={data.avgClicksPerLink}      color={AMB}  delay={120} sub="per link" />
+              <BigStat icon={<CheckCircle size={20}/>} label="Active Links"     value={data.activeLinks}           color={BLU}  delay={180} sub={`of ${data.totalLinks}`} />
+              <BigStat icon={<Clock size={20}/>} label="Expired Links"    value={data.expiredLinks}          color="#9f67f5" delay={240} sub="past deadline" />
             </div>
 
             {/* ── MAIN CHART + TOP LINKS ── */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 20, marginBottom: 20 }}>
               {/* Clicks + Links created over time */}
-              <ChartCard title="Clicks & links created" sub="Daily trend over selected period" icon="📊" delay={80}
+              <ChartCard title="Clicks & links created" sub="Daily trend over selected period" icon={<BarChart2 size={20}/>} delay={80}
                 right={
                   <div style={{ display: 'flex', gap: 5 }}>
                     {[{k:'7d',l:'7 days'},{k:'30d',l:'30 days'}].map(({k,l}) => (
@@ -193,7 +194,7 @@ export default function Analytics() {
               </ChartCard>
 
               {/* Top 5 links */}
-              <ChartCard title="Top links" sub="Highest click count" icon="🏆" delay={100}>
+              <ChartCard title="Top links" sub="Highest click count" icon={<Trophy size={20}/>} delay={100}>
                 {data.topLinks?.length > 0 ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     {data.topLinks.map((l, i) => (
@@ -217,7 +218,7 @@ export default function Analytics() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 20, marginBottom: 20 }}>
 
               {/* Countries */}
-              <ChartCard title="Top countries" sub="All-time geo breakdown" icon="🌍" delay={160}>
+              <ChartCard title="Top countries" sub="All-time geo breakdown" icon={<Globe size={20}/>} delay={160}>
                 {data.byCountry?.length > 0 ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                     {data.byCountry.slice(0,6).map(({country,count},i) => {
@@ -237,7 +238,7 @@ export default function Analytics() {
               </ChartCard>
 
               {/* Device donut */}
-              <ChartCard title="Device types" sub="Desktop vs mobile vs tablet" icon="📱" delay={200}>
+              <ChartCard title="Device types" sub="Desktop vs mobile vs tablet" icon={<Smartphone size={20}/>} delay={200}>
                 {data.byDevice?.length > 0 ? (
                   <>
                     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 10 }}>
@@ -253,12 +254,12 @@ export default function Analytics() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                       {data.byDevice.map(({device,count},i) => {
                         const pct = total ? Math.round((count/total)*100) : 0
-                        const icons = { desktop:'🖥️', mobile:'📱', tablet:'📟' }
+                        const icons = { desktop:<Monitor size={14}/>, mobile:<Smartphone size={14}/>, tablet:<Tablet size={14}/> }
                         return (
                           <div key={device||i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                               <div style={{ width: 9, height: 9, borderRadius: '50%', background: COLS[(i+3)%COLS.length] }}/>
-                              <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.825rem', color: INK }}>{icons[device?.toLowerCase()]||'💻'} {device?device[0].toUpperCase()+device.slice(1):'Unknown'}</span>
+                              <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.825rem', color: INK }}>{icons[device?.toLowerCase()]||<Monitor size={14}/>} {device?device[0].toUpperCase()+device.slice(1):'Unknown'}</span>
                             </div>
                             <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.8rem', fontWeight: 700, color: COLS[(i+3)%COLS.length] }}>{pct}%</span>
                           </div>
@@ -270,7 +271,7 @@ export default function Analytics() {
               </ChartCard>
 
               {/* Browser + Referrers */}
-              <ChartCard title="Traffic sources" sub="Browsers & referrers" icon="🔗" delay={240}>
+              <ChartCard title="Traffic sources" sub="Browsers & referrers" icon={<LinkIcon size={20}/>} delay={240}>
                 {(data.byBrowser?.length > 0 || data.byReferer?.length > 0) ? (
                   <div>
                     <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.09em', textTransform: 'uppercase', color: '#8d8b94', marginBottom: 8 }}>Browsers</div>
@@ -306,7 +307,7 @@ export default function Analytics() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 20 }}>
 
               {/* All links table */}
-              <ChartCard title="All links performance" sub="Click breakdown across your workspace" icon="📋" delay={280}>
+              <ChartCard title="All links performance" sub="Click breakdown across your workspace" icon={<ClipboardList size={20}/>} delay={280}>
                 {urls.length > 0 ? (
                   <div style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.8rem' }}>
@@ -353,13 +354,13 @@ export default function Analytics() {
               </ChartCard>
 
               {/* Recent activity feed */}
-              <ChartCard title="Recent activity" sub="Latest clicks across all links" icon="⚡" delay={300}>
+              <ChartCard title="Recent activity" sub="Latest clicks across all links" icon={<Zap size={20}/>} delay={300}>
                 {data.recentActivity?.length > 0 ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                     {data.recentActivity.map((v, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 0', borderBottom: i < data.recentActivity.length-1 ? `1px solid ${LINE}` : 'none' }}>
                         <div style={{ width: 30, height: 30, borderRadius: 8, background: `${COLS[i%COLS.length]}12`, border: `1px solid ${COLS[i%COLS.length]}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', flexShrink: 0 }}>
-                          {v.device==='mobile'?'📱':v.device==='tablet'?'📟':'🖥️'}
+                          {v.device==="mobile"?<Smartphone size={14}/>:v.device==="tablet"?<Tablet size={14}/>:<Monitor size={14}/>}
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 1 }}>
@@ -374,7 +375,7 @@ export default function Analytics() {
                   </div>
                 ) : (
                   <div style={{ textAlign: 'center', padding: '32px 0' }}>
-                    <div style={{ fontSize: '1.75rem', marginBottom: 8 }}>📭</div>
+                    <div style={{display:"flex", justifyContent:"center", marginBottom:8}}><Inbox size={28}/></div>
                     <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.9rem', fontWeight: 600, color: INK }}>No activity yet</div>
                     <div style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.8rem', color: '#8d8b94', marginTop: 4 }}>Share your links to start collecting data</div>
                   </div>

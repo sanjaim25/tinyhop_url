@@ -1,3 +1,4 @@
+import { MessageCircle, Rocket, Bug } from 'lucide-react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -87,21 +88,21 @@ export default function Contact() {
         }}>
           {[
             {
-              icon: '💬',
+              icon: <MessageCircle size={24}/>,
               title: 'General Support',
               desc: 'Questions about your account or features',
               contact: 'support@tinyhop-url.onrender.com',
               action: 'Email Support'
             },
             {
-              icon: '🚀',
+              icon: <Rocket size={24}/>,
               title: 'Sales & Enterprise',
               desc: 'Discuss custom plans and solutions',
               contact: 'sales@tinyhop-url.onrender.com',
               action: 'Contact Sales'
             },
             {
-              icon: '🐛',
+              icon: <Bug size={24}/>,
               title: 'Report an Issue',
               desc: 'Found a bug or technical problem?',
               contact: 'bugs@tinyhop-url.onrender.com',
