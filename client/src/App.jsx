@@ -1,7 +1,15 @@
 import React, { Suspense } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './context/AuthContext'
+import { useAuth } from './context/AuthContext'
+
+// Redirect logged-in users away from public-only pages
+function PublicOnlyRoute({ children, redirectTo = '/shorten' }) {
+  const { isAuthenticated, loading } = useAuth()
+  if (loading) return null
+  return isAuthenticated ? <Navigate to={redirectTo} replace /> : children
+}
 import ProtectedRoute from './components/ProtectedRoute'
 import ScrollToTop from './components/ScrollToTop'
 import Navbar from './components/Navbar'
@@ -70,9 +78,9 @@ export default function App() {
         <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* Core */}
-            <Route path="/"          element={<Landing />} />
-            <Route path="/login"     element={<Login />} />
-            <Route path="/signup"    element={<Signup />} />
+            <Route path="/"          element={<PublicOnlyRoute><Landing /></PublicOnlyRoute>} />
+            <Route path="/login"     element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
+            <Route path="/signup"    element={<PublicOnlyRoute><Signup /></PublicOnlyRoute>} />
             <Route path="/pricing"   element={<Pricing />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/shorten"   element={<ProtectedRoute><Shorten /></ProtectedRoute>} />
