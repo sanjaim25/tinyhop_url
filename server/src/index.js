@@ -21,11 +21,12 @@ app.use(helmet({
 // Enable trust proxy so rate limiting works behind Render's load balancers
 app.set('trust proxy', 1)
 
-// 2. Strict CORS Configuration
+// 2. CORS — only apply to /api/ routes (redirect routes must NOT be blocked by CORS
+//    since the password form POSTs from the Render domain itself which isn't in CLIENT_URL)
 const allowedOrigins = process.env.CLIENT_URL 
   ? process.env.CLIENT_URL.split(',').map(url => url.trim().replace(/\/$/, '')) 
   : ['http://localhost:5173', 'https://tinyhop-url.vercel.app']
-app.use(cors({
+const corsMiddleware = cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true)
@@ -34,7 +35,8 @@ app.use(cors({
     }
   },
   credentials: true
-}))
+})
+app.use('/api/', corsMiddleware)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
