@@ -86,6 +86,15 @@ The application will be accessible at `http://localhost:5173`.
 - **Authentication**: JWT-based authentication is used for stateless, scalable session management.
 - **Client Features**: Modern browsers with JavaScript enabled are required to utilize features like copy-to-clipboard, PDF generation, and drag-and-drop bulk CSV uploads.
 
+## Future Updates
+
+We are constantly working to improve TinyHop. Here are some of the features planned for future releases:
+- **Advanced Analytics**: Geolocation tracking, device/browser statistics, and referrer tracking for deeper insights into link engagement.
+- **Custom Domains**: Allow users to link their own domains (e.g., `link.yourbrand.com`) for fully white-labeled short URLs.
+- **Link Expiration & Expiry Schedules**: Set automated schedules for links to activate and deactivate, ideal for time-sensitive campaigns.
+- **API Access**: Provide a robust public API for developers to programmatically create and manage links from their own applications.
+- **Team Workspaces**: Collaborate with team members, manage shared link collections, and assign role-based access.
+
 ---
 
 This project is a part of a hackathon run by https://katomaran.com
