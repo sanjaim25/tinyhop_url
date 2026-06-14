@@ -47,6 +47,38 @@ export const PageLoader = () => (
   </div>
 )
 
+// Error Boundary to catch chunk loading errors (fixes the black screen issue permanently)
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true }
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error("Caught error:", error, errorInfo)
+    if (error.message && error.message.includes('Failed to fetch dynamically imported module')) {
+      if (!sessionStorage.getItem('chunk_reloaded')) {
+        sessionStorage.setItem('chunk_reloaded', 'true')
+        window.location.reload()
+      }
+    }
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#0a0a14', color: '#fff', fontFamily: "'Space Grotesk',sans-serif", padding: 24, textAlign: 'center' }}>
+          <h1 style={{ fontFamily: "'Playfair Display',serif", fontSize: '2.5rem', marginBottom: '1rem', fontWeight: 900, color: '#f4f3ff' }}>Something went wrong.</h1>
+          <p style={{ color: '#8d8b94', marginBottom: '2rem', maxWidth: 400 }}>A new version of the site was likely deployed while you were away. Please refresh to get the latest version.</p>
+          <button onClick={() => { sessionStorage.removeItem('chunk_reloaded'); window.location.reload() }} style={{ padding: '12px 24px', background: '#7c3aed', color: '#fff', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: '0.9rem', transition: 'background .2s' }}>Refresh Page</button>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
 export default function App() {
   return (
     <AuthProvider>
@@ -75,43 +107,45 @@ export default function App() {
         />
         <Navbar />
         
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            {/* Core */}
-            <Route path="/"          element={<PublicOnlyRoute><Landing /></PublicOnlyRoute>} />
-            <Route path="/login"     element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
-            <Route path="/signup"    element={<PublicOnlyRoute><Signup /></PublicOnlyRoute>} />
-            <Route path="/pricing"   element={<Pricing />} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/shorten"   element={<ProtectedRoute><Shorten /></ProtectedRoute>} />
-            <Route path="/bulk"      element={<ProtectedRoute><BulkShorten /></ProtectedRoute>} />
-            <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
-            <Route path="/profile"   element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <ErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              {/* Core */}
+              <Route path="/"          element={<PublicOnlyRoute><Landing /></PublicOnlyRoute>} />
+              <Route path="/login"     element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
+              <Route path="/signup"    element={<PublicOnlyRoute><Signup /></PublicOnlyRoute>} />
+              <Route path="/pricing"   element={<Pricing />} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/shorten"   element={<ProtectedRoute><Shorten /></ProtectedRoute>} />
+              <Route path="/bulk"      element={<ProtectedRoute><BulkShorten /></ProtectedRoute>} />
+              <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+              <Route path="/profile"   element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
-            {/* Info / resource pages */}
-            <Route path="/blog"                element={<Blog />} />
-            <Route path="/developers"          element={<Developers />} />
-            <Route path="/contact"             element={<Contact />} />
-            <Route path="/help"                element={<HelpDesk />} />
-            <Route path="/legal"               element={<Legal />} />
-            <Route path="/terms"               element={<TermsOfService />} />
-            <Route path="/privacy"             element={<PrivacyPolicy />} />
-            <Route path="/about"               element={<About />} />
-            <Route path="/analytics-showcase"  element={<AnalyticsShowcase />} />
+              {/* Info / resource pages */}
+              <Route path="/blog"                element={<Blog />} />
+              <Route path="/developers"          element={<Developers />} />
+              <Route path="/contact"             element={<Contact />} />
+              <Route path="/help"                element={<HelpDesk />} />
+              <Route path="/legal"               element={<Legal />} />
+              <Route path="/terms"               element={<TermsOfService />} />
+              <Route path="/privacy"             element={<PrivacyPolicy />} />
+              <Route path="/about"               element={<About />} />
+              <Route path="/analytics-showcase"  element={<AnalyticsShowcase />} />
 
-            {/* Feature pages */}
-            <Route path="/features"                  element={<FeaturesIndex />} />
-            <Route path="/features/link-shortening"  element={<LinkShortening />} />
-            <Route path="/features/analytics"        element={<Navigate to="/analytics-showcase" replace />} />
-            <Route path="/features/custom-aliases"   element={<CustomAliases />} />
-            <Route path="/features/qr-codes"         element={<QRCodes />} />
-            <Route path="/features/link-expiry"      element={<LinkExpiry />} />
-            <Route path="/features/smart-routing"    element={<SmartRouting />} />
+              {/* Feature pages */}
+              <Route path="/features"                  element={<FeaturesIndex />} />
+              <Route path="/features/link-shortening"  element={<LinkShortening />} />
+              <Route path="/features/analytics"        element={<Navigate to="/analytics-showcase" replace />} />
+              <Route path="/features/custom-aliases"   element={<CustomAliases />} />
+              <Route path="/features/qr-codes"         element={<QRCodes />} />
+              <Route path="/features/link-expiry"      element={<LinkExpiry />} />
+              <Route path="/features/smart-routing"    element={<SmartRouting />} />
 
-            {/* 404 fallback */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
+              {/* 404 fallback */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </BrowserRouter>
     </AuthProvider>
   )
