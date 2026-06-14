@@ -2,7 +2,9 @@
 
 TinyHop is a professional, high-performance URL shortener and link management platform. It offers an elegant user interface for creating, managing, and analyzing short links, complete with features like custom aliases, password protection, bulk link shortening, and detailed click analytics.
 
-## [🎥 Watch the complete TinyHop demonstration video here!](https://www.loom.com/share/7c82266bdf1f4f8db279f63b03d1c19a)
+## 🎥 Project Demonstration
+---
+- **Watch the Walkthrough:** [![Loom Video](https://img.shields.io/badge/LOOM-VIDEO-635BFF?style=for-the-badge&logo=loom&logoColor=white&labelColor=555555)](https://www.loom.com/share/7c82266bdf1f4f8db279f63b03d1c19a)
 
 ## Architecture & AI Planning Document
 
