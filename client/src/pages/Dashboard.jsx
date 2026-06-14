@@ -600,8 +600,24 @@ function CreateModal({ onClose, onCreated }) {
                 </div>
               </div>
               <div>
-                <label style={{ display: 'block', fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8d8b94', marginBottom: 7 }}>Expires <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#b0adb8' }}>(opt)</span></label>
-                <input id="modal-expires-at" type="datetime-local" style={{ ...IS, colorScheme: 'light' }} value={form.expiresAt} onChange={e => setForm({ ...form, expiresAt: e.target.value })} min={(() => { const d = new Date(); d.setSeconds(0,0); const off = d.getTimezoneOffset(); return new Date(d.getTime() - off * 60000).toISOString().slice(0,16) })()} onFocus={e => e.target.style.borderBottomColor = V} onBlur={e => e.target.style.borderBottomColor = INK} autoComplete="off" />
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: form.expiresAt ? 7 : 0 }}>
+                  <label style={{ display: 'block', fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8d8b94' }}>Expires <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#b0adb8' }}>(opt)</span></label>
+                  {form.expiresAt && (
+                    <button type="button" onClick={() => setForm({ ...form, expiresAt: '' })} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.72rem', color: '#ef4444', fontFamily: "'Space Grotesk',sans-serif", fontWeight: 600, padding: 0 }}>Clear</button>
+                  )}
+                </div>
+                {!form.expiresAt ? (
+                  <button type="button" onClick={() => { const d = new Date(); d.setDate(d.getDate()+1); d.setSeconds(0,0); const off = d.getTimezoneOffset(); setForm({ ...form, expiresAt: new Date(d.getTime() - off*60000).toISOString().slice(0,16) }) }}
+                    style={{ width: '100%', padding: '11px 13px', background: P2, border: `1.5px dashed ${LINE}`, borderRadius: 0, color: '#8d8b94', fontSize: '0.875rem', fontFamily: "'Space Grotesk',sans-serif", cursor: 'pointer', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 8, transition: 'all .15s', boxSizing: 'border-box' }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = V; e.currentTarget.style.color = V }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = LINE; e.currentTarget.style.color = '#8d8b94' }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Set expiry date & time
+                  </button>
+                ) : (
+                  <input id="modal-expires-at" type="datetime-local" style={{ ...IS, colorScheme: 'light', background: '#fff', border: `1.5px solid ${V}40`, borderBottom: `2px solid ${V}` }} value={form.expiresAt} onChange={e => setForm({ ...form, expiresAt: e.target.value })} min={(() => { const d = new Date(); d.setSeconds(0,0); const off = d.getTimezoneOffset(); return new Date(d.getTime() - off * 60000).toISOString().slice(0,16) })()} onFocus={e => e.target.style.borderBottomColor = V} onBlur={e => e.target.style.borderBottomColor = V} autoComplete="off" autoFocus />
+                )}
               </div>
             </div>
             <div>
