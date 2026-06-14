@@ -160,18 +160,26 @@ const handleRedirect = async (req, res, next) => {
       if (!/^https?:\/\//i.test(targetUrl)) {
         targetUrl = 'https://' + targetUrl
       }
-      // Validate it parses correctly
       const parsed = new URL(targetUrl)
-      targetUrl = parsed.href // Use the normalized href
+      targetUrl = parsed.href
     } catch (e) {
       console.error('Invalid target URL:', targetUrl, e.message)
       return res.status(400).send('Invalid destination URL stored for this short link.')
     }
 
-    // Use writeHead for reliable redirect (avoids Express redirect() throwing on some URLs)
-    const statusCode = req.method === 'POST' ? 303 : 301
-    res.writeHead(statusCode, { 'Location': targetUrl })
-    return res.end()
+    // For POST (password form submit): use JS redirect to avoid HTTP header restrictions
+    if (req.method === 'POST') {
+      return res.send(`<!DOCTYPE html><html><head><title>Redirecting...</title></head><body><script>window.location.replace(${JSON.stringify(targetUrl)})</script><noscript><meta http-equiv="refresh" content="0;url=${targetUrl.replace(/"/g, '&quot;')}"><a href="${targetUrl.replace(/"/g, '&quot;')}">Click here to continue</a></noscript></body></html>`)
+    }
+
+    // For GET: standard redirect
+    try {
+      res.writeHead(301, { 'Location': encodeURI(targetUrl) })
+      return res.end()
+    } catch (headerErr) {
+      console.error('Redirect header error:', headerErr.message)
+      return res.send(`<!DOCTYPE html><html><head><title>Redirecting...</title></head><body><script>window.location.replace(${JSON.stringify(targetUrl)})</script></body></html>`)
+    }
   } catch (err) {
     next(err)
   }
