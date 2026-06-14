@@ -551,16 +551,16 @@ function SetExpiryModal({ url, onClose, onUpdated }) {
   const [loading, setLoading] = useState(false)
   const removeExpiry = async () => {
     setLoading(true)
-    try { const r = await api.patch(`/api/urls/${url.id}`, { expiresAt: null }); toast.success('Expiry removed!'); onUpdated(r.data); onClose() }
+    try { const r = await api.patch(`/api/urls/${url.id}`, { expiresAt: null }); toast.success('Expiry removed!'); onUpdated(r.data) }
     catch { toast.error('Failed to remove expiry') } finally { setLoading(false) }
   }
   const submit = async (e) => {
     e.preventDefault(); setLoading(true)
     try {
-      const payload = val ? { expiresAt: new Date(val).toISOString() } : { expiresAt: null }
-      const res = await api.patch(`/api/urls/${url.id}`, payload)
-      toast.success(val ? 'Expiry set!' : 'Expiry removed!'); onUpdated(res.data); onClose()
-    } catch { toast.error('Failed to update expiry') } finally { setLoading(false) }
+      if (!val) { toast.error('Please select a date and time'); setLoading(false); return }
+      const res = await api.patch(`/api/urls/${url.id}`, { expiresAt: new Date(val).toISOString() })
+      toast.success('Expiry set!'); onUpdated(res.data)
+    } catch (err) { toast.error(err?.response?.data?.error || 'Failed to update expiry') } finally { setLoading(false) }
   }
   return (
     <div style={{ position:'fixed', inset:0, background:'rgba(20,20,28,0.52)', backdropFilter:'blur(10px)', zIndex:400, display:'flex', alignItems:'center', justifyContent:'center', padding:24, animation:'fadeIn .2s ease both' }} onClick={e => e.target===e.currentTarget && onClose()}>
