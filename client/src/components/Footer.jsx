@@ -106,15 +106,6 @@ export default function Footer() {
           <p style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.3)' }}>
             © {new Date().getFullYear()} TinyHop. All rights reserved.
           </p>
-          <div style={{ display: 'flex', gap: 28 }}>
-            {['Privacy', 'Terms', 'Cookies'].map(t => (
-              <a key={t} href="#" style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.3)', textDecoration: 'none', transition: 'color .15s' }}
-                onMouseEnter={e => e.target.style.color='rgba(255,255,255,0.7)'}
-                onMouseLeave={e => e.target.style.color='rgba(255,255,255,0.3)'}>
-                {t}
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>
