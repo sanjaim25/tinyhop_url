@@ -156,19 +156,22 @@ const handleRedirect = async (req, res, next) => {
 
     // 7. Sanitize and validate the target URL before redirecting
     try {
-      // Trim whitespace/newlines that may have been stored
       targetUrl = targetUrl.trim()
-      // Ensure protocol is present
       if (!/^https?:\/\//i.test(targetUrl)) {
         targetUrl = 'https://' + targetUrl
       }
-      // Validate it's a real URL
-      new URL(targetUrl)
+      // Validate it parses correctly
+      const parsed = new URL(targetUrl)
+      targetUrl = parsed.href // Use the normalized href
     } catch (e) {
+      console.error('Invalid target URL:', targetUrl, e.message)
       return res.status(400).send('Invalid destination URL stored for this short link.')
     }
 
-    return res.redirect(req.method === 'POST' ? 303 : 301, targetUrl)
+    // Use writeHead for reliable redirect (avoids Express redirect() throwing on some URLs)
+    const statusCode = req.method === 'POST' ? 303 : 301
+    res.writeHead(statusCode, { 'Location': targetUrl })
+    return res.end()
   } catch (err) {
     next(err)
   }
