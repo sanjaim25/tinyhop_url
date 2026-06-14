@@ -90,16 +90,33 @@ const handleRedirect = async (req, res, next) => {
         return res.send(`
           <!DOCTYPE html>
           <html>
-          <head><title>Password Protected</title><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <style>body{background:#09090b;color:#fafafa;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}.card{background:#18181b;border:1px solid #27272a;border-radius:20px;padding:40px;text-align:center}input{padding:10px;border-radius:5px;border:1px solid #555;margin-bottom:15px;background:#000;color:#fff}button{padding:10px 20px;cursor:pointer;background:#0052ff;color:#fff;border:none;border-radius:5px}</style></head>
-          <body><div class="card"><h1>Link Protected</h1>
-          <form method="POST" action="">
-            <input type="password" name="pwd" placeholder="Enter password" autofocus />
-            <br/>
-            ${pwd !== undefined ? '<p style="color:#ef4444;font-size:14px;margin-top:0">Incorrect password</p>' : ''}
-            <button type="submit">Unlock</button>
-          </form>
-          </div></body></html>
+          <head>
+            <title>Password Protected</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+            <style>
+              body { background:#eceae4; color:#15141c; font-family:'Space Grotesk',sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; padding:20px; box-sizing:border-box; }
+              .card { background:#fff; border:1px solid rgba(20,20,28,0.08); border-radius:24px; padding:48px 40px; text-align:center; box-shadow:0 32px 80px rgba(20,20,28,0.08); width:100%; max-width:400px; box-sizing:border-box; }
+              h1 { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; margin-top:0; margin-bottom:8px; color:#15141c; letter-spacing:-0.03em; }
+              p.desc { font-size:0.9rem; color:#8d8b94; margin-bottom:28px; }
+              input { width:100%; box-sizing:border-box; padding:14px 16px; border-radius:12px; border:1.5px solid rgba(20,20,28,0.1); margin-bottom:16px; background:#f9f9f8; color:#15141c; font-size:1rem; font-family:'Space Grotesk',sans-serif; outline:none; transition:all .2s; }
+              input:focus { border-color:#7c3aed; background:#fff; box-shadow:0 0 0 4px rgba(124,58,237,0.1); }
+              button { width:100%; padding:14px; cursor:pointer; background:#7c3aed; color:#fff; border:none; border-radius:12px; font-size:1rem; font-weight:700; font-family:'Space Grotesk',sans-serif; transition:all .2s; box-shadow:0 4px 14px rgba(124,58,237,0.35); }
+              button:hover { background:#6d28d9; transform:translateY(-1px); box-shadow:0 6px 20px rgba(124,58,237,0.45); }
+            </style>
+          </head>
+          <body>
+            <div class="card">
+              <h1>Link Protected</h1>
+              <p class="desc">This link requires a password to access.</p>
+              <form method="POST" action="">
+                <input type="password" name="pwd" placeholder="Enter password" autofocus />
+                ${pwd !== undefined ? '<p style="color:#ef4444;font-size:14px;margin-top:-8px;margin-bottom:16px;font-weight:500;">Incorrect password</p>' : ''}
+                <button type="submit">Unlock</button>
+              </form>
+            </div>
+          </body>
+          </html>
         `)
       }
     }
@@ -137,7 +154,7 @@ const handleRedirect = async (req, res, next) => {
       prisma.url.update({ where: { id: url.id }, data: { clickCount: { increment: 1 } } })
     ]).catch(err => console.error('Analytics Write Error:', err))
 
-    return res.redirect(301, targetUrl)
+    return res.redirect(req.method === 'POST' ? 303 : 301, targetUrl)
   } catch (err) {
     next(err)
   }
