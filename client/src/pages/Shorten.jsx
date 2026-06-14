@@ -153,7 +153,11 @@ export default function Shorten() {
     try {
       const payload = { originalUrl: url.trim() }
       if (alias.trim())    payload.customCode = alias.trim()
-      if (expiry)          payload.expiresAt  = new Date(expiry).toISOString()
+      if (expiry) {
+        // datetime-local gives local time (e.g. "2026-06-15T10:30") — convert correctly to UTC ISO
+        const localDate = new Date(expiry)
+        payload.expiresAt = localDate.toISOString()
+      }
       if (usePassword && password.trim()) payload.password = password.trim()
       const res = await api.post('/api/urls', payload)
       setResult(res.data)
@@ -253,7 +257,8 @@ export default function Shorten() {
 
                   {/* Link expiry */}
                   <Field label="Link expiry" hint="optional">
-                    <input type="datetime-local" value={expiry} onChange={e => setExpiry(e.target.value)} min={new Date().toISOString().slice(0,16)}
+                    <input type="datetime-local" value={expiry} onChange={e => setExpiry(e.target.value)}
+                      min={(() => { const d = new Date(); d.setSeconds(0,0); const off = d.getTimezoneOffset(); return new Date(d.getTime() - off * 60000).toISOString().slice(0,16) })()}
                       style={{ ...inputStyle(false), colorScheme:'light' }}
                       onFocus={focusIn} onBlur={e => focusOut(e, false)}
                       autoComplete="off"

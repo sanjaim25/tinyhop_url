@@ -601,7 +601,7 @@ function CreateModal({ onClose, onCreated }) {
               </div>
               <div>
                 <label style={{ display: 'block', fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8d8b94', marginBottom: 7 }}>Expires <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#b0adb8' }}>(opt)</span></label>
-                <input id="modal-expires-at" type="datetime-local" style={{ ...IS, colorScheme: 'light' }} value={form.expiresAt} onChange={e => setForm({ ...form, expiresAt: e.target.value })} min={new Date().toISOString().slice(0, 16)} onFocus={e => e.target.style.borderBottomColor = V} onBlur={e => e.target.style.borderBottomColor = INK} autoComplete="off" />
+                <input id="modal-expires-at" type="datetime-local" style={{ ...IS, colorScheme: 'light' }} value={form.expiresAt} onChange={e => setForm({ ...form, expiresAt: e.target.value })} min={(() => { const d = new Date(); d.setSeconds(0,0); const off = d.getTimezoneOffset(); return new Date(d.getTime() - off * 60000).toISOString().slice(0,16) })()} onFocus={e => e.target.style.borderBottomColor = V} onBlur={e => e.target.style.borderBottomColor = INK} autoComplete="off" />
               </div>
             </div>
             <div>
