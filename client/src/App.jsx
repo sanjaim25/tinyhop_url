@@ -7,7 +7,7 @@ import { useAuth } from './context/AuthContext'
 // Redirect logged-in users away from public-only pages
 function PublicOnlyRoute({ children, redirectTo = '/shorten' }) {
   const { isAuthenticated, loading } = useAuth()
-  if (loading) return null
+  if (loading) return <PageLoader />
   return isAuthenticated ? <Navigate to={redirectTo} replace /> : children
 }
 import ProtectedRoute from './components/ProtectedRoute'
@@ -41,9 +41,9 @@ const HelpDesk = React.lazy(() => import('./pages/HelpDesk'))
 const BulkShorten = React.lazy(() => import('./pages/BulkShorten'))
 
 // App-wide suspense loader
-const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-[#09090b]">
-    <div className="w-8 h-8 border-4 border-[#0052ff] border-t-transparent rounded-full animate-spin"></div>
+export const PageLoader = () => (
+  <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0a0a14' }}>
+    <div style={{ width: 32, height: 32, border: '3px solid rgba(124,58,237,0.2)', borderTopColor: '#7c3aed', borderRadius: '50%', animation: 'spinFast .7s linear infinite' }} />
   </div>
 )
 
