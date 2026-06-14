@@ -154,6 +154,20 @@ const handleRedirect = async (req, res, next) => {
       prisma.url.update({ where: { id: url.id }, data: { clickCount: { increment: 1 } } })
     ]).catch(err => console.error('Analytics Write Error:', err))
 
+    // 7. Sanitize and validate the target URL before redirecting
+    try {
+      // Trim whitespace/newlines that may have been stored
+      targetUrl = targetUrl.trim()
+      // Ensure protocol is present
+      if (!/^https?:\/\//i.test(targetUrl)) {
+        targetUrl = 'https://' + targetUrl
+      }
+      // Validate it's a real URL
+      new URL(targetUrl)
+    } catch (e) {
+      return res.status(400).send('Invalid destination URL stored for this short link.')
+    }
+
     return res.redirect(req.method === 'POST' ? 303 : 301, targetUrl)
   } catch (err) {
     next(err)
