@@ -438,6 +438,12 @@ function UrlRow({ url, index, onDelete, onCopy, onEdit, onQR, onAnalytics }) {
               <span style={{ width: 4, height: 4, borderRadius: '50%', background: 'currentColor' }} />
               {expired ? 'Expired' : 'Active'}
             </span>
+            {url.password && (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, padding: '2px 7px', borderRadius: 99, fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', background: 'rgba(124,58,237,0.08)', color: '#7c3aed', border: '1px solid rgba(124,58,237,0.18)' }}>
+                <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                Protected
+              </span>
+            )}
           </div>
           <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.775rem', color: '#8d8b94', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 420 }}>{url.originalUrl}</p>
         </div>
@@ -707,6 +713,13 @@ export default function Dashboard() {
     finally { setLoading(false) }
   }, [])
   useEffect(() => { fetchUrls() }, [fetchUrls])
+
+  // Refresh click counts when user comes back to this tab
+  useEffect(() => {
+    const onVisible = () => { if (document.visibilityState === 'visible') fetchUrls() }
+    document.addEventListener('visibilitychange', onVisible)
+    return () => document.removeEventListener('visibilitychange', onVisible)
+  }, [fetchUrls])
 
   const fetchBatchDetails = async (batchId) => {
     try {
