@@ -239,9 +239,9 @@ export default function Shorten() {
                   <Field label="Custom alias" hint="optional">
                     <div style={{ position:'relative' }}>
                       <span className="shorten-alias-prefix" style={{ position:'absolute', left:16, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.8125rem', color:'#b0adb8', pointerEvents:'none', whiteSpace:'nowrap', fontWeight:500, zIndex:1, userSelect:'none' }}>tinyhop-url/</span>
-                      {!alias && <span className="shorten-alias-placeholder" style={{ position:'absolute', left:215, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.875rem', color:'#b0adb8', pointerEvents:'none', fontWeight:400 }}>my-brand</span>}
+                      {!alias && <span className="shorten-alias-placeholder" style={{ position:'absolute', left:115, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.875rem', color:'#b0adb8', pointerEvents:'none', fontWeight:400 }}>my-brand</span>}
                       <input className="shorten-alias-input" type="text" value={alias} placeholder="" onChange={e => { setAlias(e.target.value); setAliasError('') }}
-                        style={{ ...inputStyle(!!aliasError), paddingLeft:215, fontFamily:"'Fragment Mono',monospace", fontSize:'0.875rem' }}
+                        style={{ ...inputStyle(!!aliasError), paddingLeft:115, fontFamily:"'Fragment Mono',monospace", fontSize:'0.875rem' }}
                         onFocus={focusIn} onBlur={e => focusOut(e, !!aliasError)}
                         autoComplete="off"
                       />
@@ -360,7 +360,7 @@ export default function Shorten() {
                   {['result','qr'].map(t => (
                     <button key={t} onClick={() => setActiveTab(t)}
                       style={{ flex:1, padding:'12px', border:'none', background: activeTab===t ? '#fff' : P2, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.8125rem', fontWeight: activeTab===t ? 700 : 500, color: activeTab===t ? V : '#8d8b94', cursor:'pointer', transition:'all .15s', borderBottom: activeTab===t ? `2px solid ${V}` : '2px solid transparent' }}>
-                      {t === 'result' ? '<span style={{display:"flex",alignItems:"center",gap:6}}><LinkIcon size={16} color="#15141c" strokeWidth={2.5} /> Short Link</span>' : '<span style={{display:"flex",alignItems:"center",gap:6}}><Smartphone size={16} color="#15141c" strokeWidth={2.5} /> QR Code</span>'}
+                      {t === 'result' ? <span style={{display:"flex",alignItems:"center",gap:6,justifyContent:"center"}}><LinkIcon size={16} color="currentColor" strokeWidth={2.5} /> Short Link</span> : <span style={{display:"flex",alignItems:"center",gap:6,justifyContent:"center"}}><Smartphone size={16} color="currentColor" strokeWidth={2.5} /> QR Code</span>}
                     </button>
                   ))}
                 </div>
