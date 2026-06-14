@@ -238,7 +238,7 @@ export default function Shorten() {
                   {/* Custom alias */}
                   <Field label="Custom alias" hint="optional">
                     <div style={{ position:'relative' }}>
-                      <span className="shorten-alias-prefix" style={{ position:'absolute', left:16, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.8125rem', color:'#b0adb8', pointerEvents:'none', whiteSpace:'nowrap', fontWeight:500, zIndex:1, userSelect:'none' }}>tinyhop-url.onrender.com/</span>
+                      <span className="shorten-alias-prefix" style={{ position:'absolute', left:16, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.8125rem', color:'#b0adb8', pointerEvents:'none', whiteSpace:'nowrap', fontWeight:500, zIndex:1, userSelect:'none' }}>tinyhop-url/</span>
                       {!alias && <span className="shorten-alias-placeholder" style={{ position:'absolute', left:215, top:'50%', transform:'translateY(-50%)', fontFamily:"'Fragment Mono',monospace", fontSize:'0.875rem', color:'#b0adb8', pointerEvents:'none', fontWeight:400 }}>my-brand</span>}
                       <input className="shorten-alias-input" type="text" value={alias} placeholder="" onChange={e => { setAlias(e.target.value); setAliasError('') }}
                         style={{ ...inputStyle(!!aliasError), paddingLeft:215, fontFamily:"'Fragment Mono',monospace", fontSize:'0.875rem' }}
@@ -326,7 +326,7 @@ export default function Shorten() {
                           <td style={{ padding:'11px 16px', whiteSpace:'nowrap' }}>
                             <a href={`${base}/${item.shortCode}`} target="_blank" rel="noopener noreferrer"
                               style={{ fontFamily:"'Fragment Mono',monospace", fontWeight:600, color:V, textDecoration:'none', display:'flex', alignItems:'center', gap:4 }}>
-                              tinyhop-url.onrender.com/{item.shortCode}
+                              tinyhop-url/{item.shortCode}
                               <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             </a>
                           </td>
@@ -374,7 +374,7 @@ export default function Shorten() {
                     {/* Big short URL display */}
                     <div style={{ background:`${V}08`, border:`1px solid ${V}20`, borderRadius:12, padding:'16px 18px', marginBottom:14 }}>
                       <div style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'1.125rem', fontWeight:700, color:V, marginBottom:6, wordBreak:'break-all' }}>
-                        tinyhop-url.onrender.com/{result.shortCode}
+                        tinyhop-url/{result.shortCode}
                       </div>
                       <div style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.75rem', color:'#8d8b94', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
                         → {result.originalUrl}
@@ -405,7 +405,7 @@ export default function Shorten() {
                     <div style={{ background:'#fff', border:`1px solid ${LINE}`, borderRadius:14, padding:16, boxShadow:'0 4px 20px rgba(20,20,28,0.08)' }}>
                       <QRCodeCanvas value={shortUrl} size={180} fgColor={V} bgColor="#ffffff" level="H" includeMargin={false} />
                     </div>
-                    <div style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'0.8125rem', color:V, fontWeight:600 }}>tinyhop-url.onrender.com/{result.shortCode}</div>
+                    <div style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'0.8125rem', color:V, fontWeight:600 }}>tinyhop-url/{result.shortCode}</div>
                     <button
                       onClick={() => {
                         const canvas = document.querySelector('canvas')

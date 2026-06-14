@@ -307,6 +307,53 @@ function EditModal({ url, onClose, onUpdated }) {
   )
 }
 
+// Confirm Modal
+function ConfirmModal({ title, message, onConfirm, onClose }) {
+  const [loading, setLoading] = useState(false)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    await onConfirm()
+    setLoading(false)
+  }
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="modal-overlay"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ type: 'spring' }}
+        className="modal"
+        style={{ maxWidth: 400 }}
+      >
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'var(--danger)', borderRadius: '24px 24px 0 0' }} />
+        <div className="modal-header">
+          <div>
+            <div className="modal-title">{title}</div>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginTop: 4 }}>
+              {message}
+            </p>
+          </div>
+        </div>
+        <div className="modal-footer" style={{ marginTop: 24 }}>
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={onClose} className="btn btn-secondary">
+            Cancel
+          </motion.button>
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleSubmit} className={`btn btn-primary ${loading ? 'btn-loading' : ''}`} style={{ background: 'var(--danger)', border: 'none' }} disabled={loading}>
+            {!loading && 'Delete'}
+          </motion.button>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 // Main Dashboard
 export default function Dashboard() {
   const { user } = useAuth()
@@ -319,6 +366,7 @@ export default function Dashboard() {
   const [showCreate, setShowCreate] = useState(false)
   const [editUrl, setEditUrl] = useState(null)
   const [qrUrl, setQrUrl] = useState(null)
+  const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [showConfetti, setShowConfetti] = useState(false)
   const [page, setPage] = useState(1)
 
@@ -355,14 +403,19 @@ export default function Dashboard() {
   const totalClicks = urls.reduce((s, u) => s + (u.clickCount || 0), 0)
 
   const handleDelete = async (id) => {
-    if (!confirm('Delete this link permanently?')) return
+    setDeleteConfirm(id)
+  }
+
+  const confirmDeleteAction = async () => {
+    if (!deleteConfirm) return
     try {
-      await api.delete(`/api/urls/${id}`)
-      setUrls((prev) => prev.filter((u) => u.id !== id))
+      await api.delete(`/api/urls/${deleteConfirm}`)
+      setUrls((prev) => prev.filter((u) => u.id !== deleteConfirm))
       toast.success('Link deleted')
     } catch {
       toast.error('Failed to delete link')
     }
+    setDeleteConfirm(null)
   }
 
   const handleCopy = (url) => {
@@ -609,6 +662,7 @@ export default function Dashboard() {
         {showCreate && <CreateModal onClose={() => setShowCreate(false)} onCreated={handleCreated} />}
         {editUrl && <EditModal url={editUrl} onClose={() => setEditUrl(null)} onUpdated={handleUpdated} />}
         {qrUrl && <QRModal url={qrUrl} onClose={() => setQrUrl(null)} />}
+        {deleteConfirm && <ConfirmModal title="Delete link" message="Delete this link permanently?" onConfirm={confirmDeleteAction} onClose={() => setDeleteConfirm(null)} />}
       </AnimatePresence>
     </div>
   )

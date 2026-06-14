@@ -137,7 +137,7 @@ export default function HelpDesk() {
 
           <FAQItem 
             question="Can I customize my short links?"
-            answer={<>Yes! You can create custom aliases for your links. Instead of a random code like "tinyhop-url.onrender.com/xK9pQ", you can have something memorable like "tinyhop-url.onrender.com/summer-sale". Just enter your desired alias when creating the link.</>}
+            answer={<>Yes! You can create custom aliases for your links. Instead of a random code like "tinyhop-url/xK9pQ", you can have something memorable like "tinyhop-url/summer-sale". Just enter your desired alias when creating the link.</>}
           />
 
           <FAQItem 

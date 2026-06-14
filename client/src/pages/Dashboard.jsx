@@ -137,7 +137,7 @@ function StatsPanel({ url, onClose }) {
           <div style={{ minWidth:0 }}>
             <div style={{ fontFamily:"'Playfair Display',serif", fontSize:'1rem', fontWeight:900, letterSpacing:'-0.02em', color:INK }}>
               <em style={{ fontStyle:'italic', color:V }}>Statistics</em>
-              <span style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'0.8rem', color:'#8d8b94', marginLeft:8 }}>tinyhop-url.onrender.com/{url.shortCode}</span>
+              <span style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'0.8rem', color:'#8d8b94', marginLeft:8 }}>tinyhop-url/{url.shortCode}</span>
             </div>
             <div style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.72rem', color:'#8d8b94', marginTop:2, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', maxWidth:320 }}>{url.originalUrl}</div>
           </div>
@@ -431,7 +431,7 @@ function UrlRow({ url, index, onDelete, onCopy, onEdit, onQR, onAnalytics }) {
             <a href={short} target="_blank" rel="noopener noreferrer" id={`url-short-link-${url.id}`}
               style={{ fontFamily: "'Fragment Mono',monospace", fontSize: '0.875rem', fontWeight: 600, color: V, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 3, transition: 'color .15s' }}
               onMouseEnter={e => e.currentTarget.style.color = VD} onMouseLeave={e => e.currentTarget.style.color = V}>
-              tinyhop-url.onrender.com/{url.shortCode}
+              tinyhop-url/{url.shortCode}
               <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
             </a>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, padding: '2px 7px', borderRadius: 99, fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase', background: expired ? 'rgba(239,68,68,0.08)' : `${GRN}10`, color: expired ? '#ef4444' : GRN, border: `1px solid ${expired ? 'rgba(239,68,68,0.15)' : GRN + '25'}` }}>
@@ -588,7 +588,7 @@ function CreateModal({ onClose, onCreated }) {
               <div>
                 <label style={{ display: 'block', fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8d8b94', marginBottom: 7 }}>Alias <span style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, color: '#b0adb8' }}>(opt)</span></label>
                 <div style={{ position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', fontFamily: "'Fragment Mono',monospace", fontSize: '0.7rem', color: '#b0adb8', pointerEvents: 'none', zIndex: 1, userSelect: 'none' }}>tinyhop-url.onrender.com/</span>
+                  <span style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', fontFamily: "'Fragment Mono',monospace", fontSize: '0.7rem', color: '#b0adb8', pointerEvents: 'none', zIndex: 1, userSelect: 'none' }}>tinyhop-url/</span>
                   {!form.customCode && <span style={{ position: 'absolute', left: 155, top: '50%', transform: 'translateY(-50%)', fontFamily: "'Fragment Mono',monospace", fontSize: '0.875rem', color: '#b0adb8', pointerEvents: 'none', fontWeight: 400 }}>my-brand</span>}
                   <input id="modal-custom-code" type="text" style={{ ...IS, paddingLeft: 155 }} placeholder="" value={form.customCode} onChange={e => setForm({ ...form, customCode: e.target.value })} onFocus={e => e.target.style.borderBottomColor = V} onBlur={e => e.target.style.borderBottomColor = INK} autoComplete="off" />
                 </div>
@@ -653,6 +653,27 @@ function EditModal({ url, onClose, onUpdated }) {
   )
 }
 
+function ConfirmModal({ title, message, onConfirm, onClose }) {
+  const [loading, setLoading] = useState(false)
+  const handleConfirm = async () => {
+    setLoading(true)
+    await onConfirm()
+    setLoading(false)
+  }
+  return (
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(20,20,28,0.52)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', zIndex: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, animation: 'fadeIn .2s ease both' }} onClick={e => e.target === e.currentTarget && onClose()}>
+      <div style={{ background: '#eceae4', border: `1px solid ${LINE}`, borderRadius: 22, width: '100%', maxWidth: 400, boxShadow: '0 32px 80px rgba(20,20,28,0.2)', position: 'relative', overflow: 'hidden', animation: 'scaleSpring .3s cubic-bezier(0.34,1.56,0.64,1) both', padding: '26px' }}>
+        <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: '1.5rem', fontWeight: 900, color: INK, marginBottom: 8 }}>{title}</h2>
+        <p style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.9rem', color: '#8d8b94', marginBottom: 24 }}>{message}</p>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 9 }}>
+          <button onClick={onClose} style={{ padding: '9px 20px', background: 'transparent', border: `1px solid ${LINE}`, borderRadius: 8, fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.875rem', fontWeight: 500, color: '#8d8b94', cursor: 'pointer', transition: 'all .15s' }}>Cancel</button>
+          <button onClick={handleConfirm} style={{ padding: '9px 22px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: 8, fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.875rem', fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', transition: 'all .2s' }} disabled={loading}>{loading ? 'Deleting...' : 'Delete'}</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Dashboard() {
   const { user } = useAuth()
   const navigate = useNavigate()
@@ -667,6 +688,7 @@ export default function Dashboard() {
   const [editUrl, setEditUrl] = useState(null)
   const [qrUrl, setQrUrl] = useState(null)
   const [openStats, setOpenStats] = useState(null)
+  const [deleteConfirm, setDeleteConfirm] = useState(null)
   const [viewMode, setViewMode] = useState('links') // 'links' or 'batches'
   const [page, setPage] = useState(1)
   const PER_PAGE = 10
@@ -697,13 +719,7 @@ export default function Dashboard() {
   }
 
   const handleDeleteBatch = async (id) => {
-    if (!confirm('Delete this batch and all its links permanently?')) return
-    try { 
-      await api.delete(`/api/urls/batches/${id}`)
-      setBatches(p => p.filter(b => b.id !== id))
-      toast.success('Batch deleted') 
-    }
-    catch { toast.error('Failed to delete batch') }
+    setDeleteConfirm({ id, type: 'batch' })
   }
 
   const filtered = viewMode === 'links' 
@@ -731,9 +747,24 @@ export default function Dashboard() {
   const clicksBar = urls.slice(0, 8).map(u => ({ name: u.shortCode, clicks: u.clickCount || 0 })).sort((a, b) => b.clicks - a.clicks)
 
   const handleDelete = async (id) => {
-    if (!confirm('Delete this link permanently?')) return
-    try { await api.delete(`/api/urls/${id}`); setUrls(p => p.filter(u => u.id !== id)); toast.success('Deleted') }
-    catch { toast.error('Failed to delete') }
+    setDeleteConfirm({ id, type: 'url' })
+  }
+
+  const confirmDeleteAction = async () => {
+    if (!deleteConfirm) return
+    const { id, type } = deleteConfirm
+    if (type === 'batch') {
+      try { 
+        await api.delete(`/api/urls/batches/${id}`)
+        setBatches(p => p.filter(b => b.id !== id))
+        toast.success('Batch deleted') 
+      }
+      catch { toast.error('Failed to delete batch') }
+    } else {
+      try { await api.delete(`/api/urls/${id}`); setUrls(p => p.filter(u => u.id !== id)); toast.success('Deleted') }
+      catch { toast.error('Failed to delete') }
+    }
+    setDeleteConfirm(null)
   }
   const handleCopy = (u) => { navigator.clipboard.writeText(`${base()}/${u.shortCode}`); toast.success('Copied!') }
   const handleCreated = (n) => setUrls(p => [n, ...p])
@@ -1030,7 +1061,7 @@ export default function Dashboard() {
                     <div style={{ width: 18, height: 18, borderRadius: 4, overflow: 'hidden', background: P3, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <img src={`https://www.google.com/s2/favicons?domain=${domain(u.originalUrl)}&sz=32`} alt="" width={11} height={11} onError={e => { e.target.style.display = 'none' }} />
                     </div>
-                    <a href={`${base()}/${u.shortCode}`} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Fragment Mono',monospace", fontSize: '0.8rem', fontWeight: 600, color: V, textDecoration: 'none', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>tinyhop-url.onrender.com/{u.shortCode}</a>
+                    <a href={`${base()}/${u.shortCode}`} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Fragment Mono',monospace", fontSize: '0.8rem', fontWeight: 600, color: V, textDecoration: 'none', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>tinyhop-url/{u.shortCode}</a>
                     <span style={{ fontFamily: "'Playfair Display',serif", fontSize: '0.9rem', fontWeight: 900, color: V, flexShrink: 0 }}>{u.clickCount || 0}</span>
                     <CopyBtn text={`${base()}/${u.shortCode}`} sm />
                   </div>
@@ -1043,8 +1074,17 @@ export default function Dashboard() {
       </div>
 
       {showCreate && <CreateModal onClose={() => setShowCreate(false)} onCreated={handleCreated} />}
+      {editUrl && <EditModal url={editUrl} onClose={() => setEditUrl(null)} onUpdated={handleUpdated} />}
       {qrUrl && <QRModal url={qrUrl} onClose={() => setQrUrl(null)} />}
       {openStats && <StatsPanel url={openStats} onClose={() => setOpenStats(null)} />}
+      {deleteConfirm && (
+        <ConfirmModal 
+          title="Delete link" 
+          message={deleteConfirm.type === 'batch' ? "Delete this batch and all its links permanently?" : "Delete this link permanently?"}
+          onConfirm={confirmDeleteAction} 
+          onClose={() => setDeleteConfirm(null)} 
+        />
+      )}
     </div>
   )
 }
