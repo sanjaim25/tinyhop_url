@@ -400,7 +400,7 @@ function StatsPanel({ url, onClose }) {
   )
 }
 
-function UrlRow({ url, index, onDelete, onCopy, onEdit, onQR, onAnalytics }) {
+function UrlRow({ url, index, onDelete, onCopy, onEdit, onQR, onAnalytics, onSetExpiry }) {
   const [hov, setHov] = useState(false)
   const [copied, setCopied] = useState(false)
   const [statHov, setStatHov] = useState(false)
@@ -519,7 +519,7 @@ function UrlRow({ url, index, onDelete, onCopy, onEdit, onQR, onAnalytics }) {
           </span>
         ) : (
           <button
-            onClick={() => onEdit && onEdit(url)}
+            onClick={() => onSetExpiry && onSetExpiry(url)}
             style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '3px 10px', background: `${AMB}08`, border: `1px solid ${AMB}20`, borderRadius: 99, fontFamily: "'Space Grotesk',sans-serif", fontSize: '0.7rem', fontWeight: 600, color: AMB, cursor: 'pointer', transition: 'all .2s' }}
             onMouseEnter={e => { e.currentTarget.style.background = `${AMB}15`; e.currentTarget.style.borderColor = `${AMB}35` }}
             onMouseLeave={e => { e.currentTarget.style.background = `${AMB}08`; e.currentTarget.style.borderColor = `${AMB}20` }}
@@ -539,6 +539,56 @@ function UrlRow({ url, index, onDelete, onCopy, onEdit, onQR, onAnalytics }) {
           <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
           View Statistics
         </button>
+      </div>
+    </div>
+  )
+}
+
+function SetExpiryModal({ url, onClose, onUpdated }) {
+  const localMin = (() => { const d = new Date(); d.setSeconds(0,0); const off = d.getTimezoneOffset(); return new Date(d.getTime() - off*60000).toISOString().slice(0,16) })()
+  const toLocal = (iso) => { if (!iso) return ''; const d = new Date(iso); const off = d.getTimezoneOffset(); return new Date(d.getTime() - off*60000).toISOString().slice(0,16) }
+  const [val, setVal] = useState(toLocal(url.expiresAt))
+  const [loading, setLoading] = useState(false)
+  const removeExpiry = async () => {
+    setLoading(true)
+    try { const r = await api.patch(`/api/urls/${url.id}`, { expiresAt: null }); toast.success('Expiry removed!'); onUpdated(r.data); onClose() }
+    catch { toast.error('Failed to remove expiry') } finally { setLoading(false) }
+  }
+  const submit = async (e) => {
+    e.preventDefault(); setLoading(true)
+    try {
+      const payload = val ? { expiresAt: new Date(val).toISOString() } : { expiresAt: null }
+      const res = await api.patch(`/api/urls/${url.id}`, payload)
+      toast.success(val ? 'Expiry set!' : 'Expiry removed!'); onUpdated(res.data); onClose()
+    } catch { toast.error('Failed to update expiry') } finally { setLoading(false) }
+  }
+  return (
+    <div style={{ position:'fixed', inset:0, background:'rgba(20,20,28,0.52)', backdropFilter:'blur(10px)', zIndex:400, display:'flex', alignItems:'center', justifyContent:'center', padding:24, animation:'fadeIn .2s ease both' }} onClick={e => e.target===e.currentTarget && onClose()}>
+      <div style={{ background:'#eceae4', border:`1px solid ${LINE}`, borderRadius:22, width:'100%', maxWidth:420, boxShadow:'0 32px 80px rgba(20,20,28,0.2)', position:'relative', overflow:'hidden', animation:'scaleSpring .3s cubic-bezier(0.34,1.56,0.64,1) both' }}>
+        <div style={{ position:'absolute', top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${AMB},${V})` }} />
+        <div style={{ padding:'26px 26px 24px' }}>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20 }}>
+            <div>
+              <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:'1.5rem', fontWeight:900, letterSpacing:'-0.025em', color:INK }}>Set <em style={{ fontStyle:'italic', color:AMB }}>Expiry</em></h2>
+              <p style={{ fontFamily:"'Fragment Mono',monospace", fontSize:'0.78rem', color:'#8d8b94', marginTop:4 }}>/{url.shortCode}</p>
+            </div>
+            <button onClick={onClose} style={{ width:32, height:32, borderRadius:8, border:`1px solid ${LINE}`, background:P2, cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', color:'#8d8b94', transition:'all .15s' }} onMouseEnter={e=>{e.currentTarget.style.background=INK;e.currentTarget.style.color='#fff'}} onMouseLeave={e=>{e.currentTarget.style.background=P2;e.currentTarget.style.color='#8d8b94'}}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <form onSubmit={submit}>
+            <label style={{ display:'block', fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.6875rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:'#8d8b94', marginBottom:8 }}>Expiry date & time</label>
+            <input type="datetime-local" autoFocus value={val} onChange={e=>setVal(e.target.value)} min={localMin}
+              style={{ width:'100%', padding:'12px 14px', background:'#fff', border:`1.5px solid ${LINE}`, borderBottom:`2px solid ${AMB}`, borderRadius:0, color:INK, fontSize:'1rem', fontFamily:"'Space Grotesk',sans-serif", outline:'none', boxSizing:'border-box', colorScheme:'light' }}
+            />
+            <p style={{ fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.78rem', color:'#8d8b94', marginTop:10, marginBottom:20 }}>Leave empty and click "Set Expiry" to remove expiry.</p>
+            <div style={{ display:'flex', gap:9, justifyContent:'flex-end', flexWrap:'wrap' }}>
+              {url.expiresAt && <button type="button" onClick={removeExpiry} disabled={loading} style={{ padding:'9px 16px', background:'transparent', border:'1px solid rgba(239,68,68,0.3)', borderRadius:8, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.875rem', fontWeight:600, color:'#ef4444', cursor:'pointer' }}>Remove expiry</button>}
+              <button type="button" onClick={onClose} style={{ padding:'9px 18px', background:'transparent', border:`1px solid ${LINE}`, borderRadius:8, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.875rem', fontWeight:500, color:'#8d8b94', cursor:'pointer' }}>Cancel</button>
+              <button type="submit" disabled={loading} style={{ padding:'9px 22px', background:AMB, color:'#fff', border:'none', borderRadius:8, fontFamily:"'Space Grotesk',sans-serif", fontSize:'0.875rem', fontWeight:700, cursor:loading?'not-allowed':'pointer', boxShadow:`0 4px 14px ${AMB}40` }}>{loading?'Saving…':'Set Expiry'}</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )
@@ -711,6 +761,7 @@ export default function Dashboard() {
   const [qrUrl, setQrUrl] = useState(null)
   const [openStats, setOpenStats] = useState(null)
   const [deleteConfirm, setDeleteConfirm] = useState(null)
+  const [setExpiryUrl, setSetExpiryUrl] = useState(null)
   const [viewMode, setViewMode] = useState('links') // 'links' or 'batches'
   const [page, setPage] = useState(1)
   const PER_PAGE = 10
@@ -798,6 +849,7 @@ export default function Dashboard() {
   const handleCopy = (u) => { navigator.clipboard.writeText(`${base()}/${u.shortCode}`); toast.success('Copied!') }
   const handleCreated = (n) => setUrls(p => [n, ...p])
   const handleUpdated = (up) => setUrls(p => p.map(u => u.id === up.id ? up : u))
+  const handleSetExpiry = (url) => setSetExpiryUrl(url)
 
   return (
     <div style={{ minHeight: '100vh', background: '#eceae4', paddingTop: 64, fontFamily: "'Space Grotesk',sans-serif" }}>
@@ -918,6 +970,7 @@ export default function Dashboard() {
                         <UrlRow url={url} index={i} onDelete={handleDelete} onCopy={handleCopy}
                           onQR={() => setQrUrl(url)}
                           onAnalytics={() => setOpenStats(url)}
+                          onSetExpiry={handleSetExpiry}
                         />
                       </div>
                     ))
@@ -977,6 +1030,7 @@ export default function Dashboard() {
                           <UrlRow url={url} index={i} onDelete={handleDelete} onCopy={handleCopy}
                             onQR={() => setQrUrl(url)}
                             onAnalytics={() => setOpenStats(url)}
+                            onSetExpiry={handleSetExpiry}
                           />
                         </div>
                       ))}
@@ -1106,6 +1160,7 @@ export default function Dashboard() {
       {editUrl && <EditModal url={editUrl} onClose={() => setEditUrl(null)} onUpdated={handleUpdated} />}
       {qrUrl && <QRModal url={qrUrl} onClose={() => setQrUrl(null)} />}
       {openStats && <StatsPanel url={openStats} onClose={() => setOpenStats(null)} />}
+      {setExpiryUrl && <SetExpiryModal url={setExpiryUrl} onClose={() => setSetExpiryUrl(null)} onUpdated={(up) => { handleUpdated(up); setSetExpiryUrl(null) }} />}
       {deleteConfirm && (
         <ConfirmModal 
           title="Delete link" 

@@ -295,6 +295,26 @@ router.post('/bulk', authenticate, async (req, res) => {
   }
 })
 
+// PATCH /api/urls/:id — Update a URL (expiry, password, originalUrl, etc.)
+router.patch('/:id', authenticate, async (req, res) => {
+  try {
+    const url = await prisma.url.findUnique({ where: { id: req.params.id } })
+    if (!url) return res.status(404).json({ error: 'Not found' })
+    if (url.userId !== req.userId) return res.status(403).json({ error: 'Forbidden' })
+    const { originalUrl, expiresAt, password, tags } = req.body
+    const data = {}
+    if (originalUrl !== undefined) data.originalUrl = originalUrl
+    if (expiresAt !== undefined) data.expiresAt = expiresAt ? new Date(expiresAt) : null
+    if (password !== undefined) data.password = password || null
+    if (tags !== undefined) data.tags = Array.isArray(tags) ? tags : []
+    const updated = await prisma.url.update({ where: { id: req.params.id }, data })
+    res.json(updated)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Server error' })
+  }
+})
+
 // DELETE /api/urls/:id — Delete a URL
 router.delete('/:id', authenticate, async (req, res) => {
   try {
